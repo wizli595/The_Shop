@@ -1,6 +1,5 @@
 import { Row } from 'react-bootstrap';
 import axios from 'axios';
-// import products from '../../public/products';
 import Product from './product';
 import { useEffect, useState } from 'react';
 const ProductList = () => {

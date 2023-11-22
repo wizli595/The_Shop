@@ -1,6 +1,8 @@
+import connectDB from "./config/db.js";
 import express from "express";
 import products from "./data/products.js";
 import cors from "cors";
+connectDB();
 const app = express();
 app.use(
   cors({
