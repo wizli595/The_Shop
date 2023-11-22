@@ -1,5 +1,6 @@
 import { Col, Card } from 'react-bootstrap';
 import propTypes from 'prop-types';
+import Rating from './rating';
 
 const Product = ({ product }) => {
     return (<>
@@ -16,6 +17,9 @@ const Product = ({ product }) => {
                             </strong>
                         </Card.Title>
                     </a>
+                    <Card.Text as={'div'} className='rating'>
+                        <Rating stars={product.rating} text={product.numReviews} />
+                    </Card.Text>
                     <Card.Text as={'h3'}>${product.price} </Card.Text>
                 </Card.Body>
             </Card>
