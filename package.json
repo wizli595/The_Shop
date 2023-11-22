@@ -1,0 +1,16 @@
+{
+  "name": "the_shop",
+  "version": "1.0.0",
+  "description": "e-commerce app build in the mern stack",
+  "type": "module",
+  "main": "server.js",
+  "scripts": {
+    "start": "node backend/server",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Wizli Abdessalam",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.18.2"
+  }
+}
