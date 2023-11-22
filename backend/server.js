@@ -1,7 +1,14 @@
 import express from "express";
 import products from "./data/products.js";
+import cors from "cors";
 const app = express();
-const PORT = 5000;
+app.use(
+  cors({
+    origin: "http://localhost:5173", // React app's url
+    credentials: true, // Allow cookies to be sent with requests from the client
+  })
+);
+const PORT = process.env.PORT || 5000;
 app.get("/", (req, res) => {
   res.send("API is running...");
 });
@@ -14,5 +21,5 @@ app.get("/api/products/:id", (req, res) => {
   res.json(product);
 });
 app.listen(PORT, () => {
-  console.log("App running on port" + PORT);
+  console.log("App running on port " + PORT);
 });
