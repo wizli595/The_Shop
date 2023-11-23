@@ -9,7 +9,8 @@
     "server": "nodemon -r dotenv/config backend/server.js ",
     "client": "npm run dev --prefix frontend",
     "serve": "concurrently \" npm run server \" \"npm run client \"",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "seeder": "node backend/seeder.js ",
+    "data:destroy": "node backend/seeder.js -d "
   },
   "author": "Wizli Abdessalam",
   "license": "MIT",
