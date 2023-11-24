@@ -2,6 +2,8 @@ import { Card, Col, Image, ListGroup, Row, Button } from 'react-bootstrap';
 import { Link, useParams } from "react-router-dom";
 import Rating from '@/components/rating';
 import { useGetProductDetailsQuery } from '../features/slices/productsApiSlice';
+import Loader from '../components/Loader';
+import Message from '../components/message';
 const ProductScreen = () => {
     const { id: productID } = useParams();
     const { data: SingleProd, isLoading, err } = useGetProductDetailsQuery(productID)
@@ -10,8 +12,8 @@ const ProductScreen = () => {
             Go Back
         </Link>
         {isLoading ?
-            (<div>isLoading</div>) : err ?
-                (<div>errorr</div>) : (<>
+            (<Loader />) : err ?
+                (<Message variant={"danger"}>{err?.data?.message || err.error}</Message>) : (<>
                     <Row>
                         <Col md={5}>
                             <Image src={SingleProd.image} alt={SingleProd.name} fluid />
@@ -60,7 +62,6 @@ const ProductScreen = () => {
                         </Col>
                     </Row>
                 </>)}
-
     </>);
 }
 
