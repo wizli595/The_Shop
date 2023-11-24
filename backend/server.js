@@ -1,10 +1,15 @@
+// all imports
 import connectDB from "./config/db.js";
 import express from "express";
 import cors from "cors";
 import productRoute from "./routes/productRoute.js";
+import { errorHandler, notFound } from "./middelware/errorMiddleware.js";
+// connect to mongoDB
 connectDB();
+// initialize express app
 const app = express();
 const PORT = process.env.PORT || 5000;
+// use all requirement
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(
@@ -13,12 +18,19 @@ app.use(
     credentials: true, // Allow cookies to be sent with requests from the client
   })
 );
-
+// @desc Test the api endpoint
+// @route GET /
+// @access Public
 app.get("/", (req, res) => {
-  console.log("jhjj");
   res.send("API is running...");
 });
+// all Routes
 app.use("/api/products", productRoute);
+// if no route work or the above throw an error
+app.use(notFound);
+app.use(errorHandler);
+
+// start the app
 app.listen(PORT, () => {
   console.log("App running on port " + PORT);
 });

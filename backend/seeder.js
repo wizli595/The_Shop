@@ -1,3 +1,4 @@
+//  import all
 import mongoose from "mongoose";
 import colors from "colors";
 import users from "./data/users.js";
@@ -7,8 +8,11 @@ import Order from "./models/orderModel.js";
 import Product from "./models/productModel.js";
 import connectDB from "./config/db.js";
 import dotenv from "dotenv";
+// env file config
 dotenv.config();
+//  connect to DB
 connectDB();
+// empty the data && and seed it up
 const importData = async () => {
   try {
     await Order.deleteMany();
@@ -27,6 +31,7 @@ const importData = async () => {
     process.exit(1);
   }
 };
+// destroy all data
 const destroyData = async () => {
   try {
     await Order.deleteMany();
@@ -39,6 +44,7 @@ const destroyData = async () => {
     process.exit(1);
   }
 };
+// controlling the flag on the command
 if (process.argv[2] === "-d") {
   destroyData();
 } else {
