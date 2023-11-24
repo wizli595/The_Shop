@@ -7,15 +7,20 @@ import ProductScreen from './screens/productScreen.jsx';
 // import 'bootstrap/dist/css/bootstrap.min.css' // old version
 import './assets/styles/bootsrap.costom.css'
 import './assets/styles/index.css'
+import { Provider } from 'react-redux';
+import store from './app/store.js';
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
-    <Router>
-      <Routes>
-        <Route exact path='/' element={<App />}>
-          <Route exact path='/' element={<HomeScreen />} />
-          <Route exact path='/product/:id' element={<ProductScreen />} />
-        </Route>
-      </Routes>
-    </Router>
+    <Provider store={store}>
+      <Router>
+        <Routes>
+          <Route exact path='/' element={<App />}>
+            <Route exact path='/' element={<HomeScreen />} />
+            <Route exact path='/product/:id' element={<ProductScreen />} />
+          </Route>
+        </Routes>
+      </Router>
+    </Provider>
+
   </React.StrictMode>,
 )

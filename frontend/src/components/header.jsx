@@ -1,6 +1,6 @@
 import { Navbar, Nav, Container } from 'react-bootstrap';
 import { FaShoppingCart, FaUser } from 'react-icons/fa';
-import logo from '../assets/lgoo.png';
+import logo from '@/assets/lgoo.png';
 import { Link } from 'react-router-dom';
 const Header = () => {
     return (<>

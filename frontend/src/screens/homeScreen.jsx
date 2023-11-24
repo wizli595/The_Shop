@@ -1,4 +1,4 @@
-import ProductList from "../components/productList";
+import ProductList from "@/components/productList";
 
 const HomeScreen = () => {
     return (<><ProductList /> </>);

@@ -1,7 +1,6 @@
 import { Card, Col, Image, ListGroup, Row, Button } from 'react-bootstrap';
-// import products from '../../public/products';
 import { Link, useParams } from "react-router-dom";
-import Rating from '../components/rating';
+import Rating from '@/components/rating';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 const ProductScreen = () => {
