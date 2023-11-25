@@ -1,5 +1,5 @@
 import { Card, Col, Image, ListGroup, Row, Button, Form } from 'react-bootstrap';
-import { Link, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import Rating from '@/components/rating';
 import { useGetProductDetailsQuery } from '../features/slices/productsApiSlice';
 import Loader from '../components/Loader';
@@ -12,8 +12,10 @@ const ProductScreen = () => {
     const [qty, setQty] = useState(1)
     const { data: SingleProd, isLoading, err } = useGetProductDetailsQuery(productID)
     const dispatch = useDispatch()
+    const navigate = useNavigate()
     const addToCartHandler = () => {
-        dispatch(addToCart({ ...SingleProd, qty }))
+        dispatch(addToCart({ ...SingleProd, qty }));
+        navigate('/cart');
     }
     return (<>
         <Link className='btn btn-light my-3' to='/'>

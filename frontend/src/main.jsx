@@ -9,6 +9,7 @@ import './assets/styles/bootsrap.costom.css'
 import './assets/styles/index.css'
 import { Provider } from 'react-redux';
 import store from './app/store.js';
+import CartScreen from './screens/cartScreen.jsx';
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
     <Provider store={store}>
@@ -17,6 +18,7 @@ ReactDOM.createRoot(document.getElementById('root')).render(
           <Route exact path='/' element={<App />}>
             <Route exact path='/' element={<HomeScreen />} />
             <Route exact path='/product/:id' element={<ProductScreen />} />
+            <Route exact path='/cart' element={<CartScreen />} />
           </Route>
         </Routes>
       </Router>

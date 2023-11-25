@@ -1,6 +1,9 @@
 export const addDecimals = (num) => {
   return (Math.round(num * 100) / 100).toFixed(2);
 };
+/////
+// NOTE :: add additional stuff to the cart state
+/////
 export const updateCart = (state) => {
   // Calcul items price
   state.itemsPrice = state.cartItems.reduce(
