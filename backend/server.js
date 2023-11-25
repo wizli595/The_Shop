@@ -5,14 +5,18 @@ import cors from "cors";
 import productRoute from "./routes/productRoute.js";
 import userRoute from "./routes/userRoute.js";
 import { errorHandler, notFound } from "./middelware/errorMiddleware.js";
-// connect to mongoDB
+import cookieParser from "cookie-parser";
+// Connect to mongoDB
 connectDB();
-// initialize express app
+// Initialize express app
 const app = express();
 const PORT = process.env.PORT || 5000;
-// use all requirement
+// Body parser middleware
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+// Cookie parcer middlware
+app.use(cookieParser());
+// Cors middelware
 app.use(
   cors({
     origin: "http://localhost:5173", // React app's url
@@ -25,10 +29,10 @@ app.use(
 app.get("/", (req, res) => {
   res.send("API is running...");
 });
-// all Routes
+// All Routes
 app.use("/api/products", productRoute);
 app.use("/api/users", userRoute);
-// if no route work or the above throw an error
+// If no route work or the above throw an error
 app.use(notFound);
 app.use(errorHandler);
 

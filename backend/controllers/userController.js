@@ -1,16 +1,27 @@
 import asyncHandler from "../middelware/asyncHandler.js";
 import User from "../models/UserModel.js";
-
+import jwt from "jsonwebtoken";
 // @desc Auth user & get token
 // @route POST /api/users/login
 // @access Public
 const authUser = asyncHandler(async (req, res) => {
   const { email, password } = req.body;
   const usr = await User.findOne({ email });
-  if (!usr) {
+  if (!usr || !(await usr.matchPassword(password))) {
     res.status(401);
     throw new Error("Invalide email or password");
   }
+  //   genrate a token with JWT
+  const token = jwt.sign({ userId: usr._id }, process.env.JWT_SECRET, {
+    expiresIn: "30d",
+  });
+  //   set JWT as HTTP-Only cookie
+  res.cookie("jwt", token, {
+    httpOnly: true,
+    secure: false,
+    sameSite: "strict",
+    maxAge: 30 * 24 * 60 * 60 * 1000, // 30 days
+  });
   res.json({
     _id: usr._id,
     name: usr.name,
