@@ -1,7 +1,5 @@
 import { Row } from 'react-bootstrap';
-// import axios from 'axios';
 import Product from './product';
-// import { useEffect, useState } from 'react';
 import { useGetProductsQuery } from '@/features/slices/productsApiSlice';
 import Loader from './Loader';
 import Message from './message';
