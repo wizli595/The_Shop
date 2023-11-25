@@ -3,6 +3,7 @@ import connectDB from "./config/db.js";
 import express from "express";
 import cors from "cors";
 import productRoute from "./routes/productRoute.js";
+import userRoute from "./routes/userRoute.js";
 import { errorHandler, notFound } from "./middelware/errorMiddleware.js";
 // connect to mongoDB
 connectDB();
@@ -26,6 +27,7 @@ app.get("/", (req, res) => {
 });
 // all Routes
 app.use("/api/products", productRoute);
+app.use("/api/users", userRoute);
 // if no route work or the above throw an error
 app.use(notFound);
 app.use(errorHandler);
