@@ -11,7 +11,7 @@ export default defineConfig({
         debug: true,
       },
     },
-    hmr: false,
+    hmr: false, //make the proxy work more offician and ctrl+s not work
   },
   resolve: {
     alias: {

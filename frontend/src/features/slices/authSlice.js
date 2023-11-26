@@ -12,7 +12,12 @@ const authSlice = createSlice({
       state.userInfo = actions.payload;
       localStorage.setItem("userInfo", JSON.stringify(state.userInfo));
     },
+    // eslint-disable-next-line no-unused-vars
+    logout: (state, actions) => {
+      state.userInfo = null;
+      localStorage.removeItem("userInfo");
+    },
   },
 });
-export const { setCredentials } = authSlice.actions;
+export const { setCredentials, logout } = authSlice.actions;
 export default authSlice.reducer;
