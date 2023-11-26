@@ -11,6 +11,7 @@ import { Provider } from 'react-redux';
 import store from './app/store.js';
 import CartScreen from './screens/cartScreen.jsx';
 import LoginScreen from './screens/loginScreen.jsx';
+import RegisterScreen from './screens/registerScreen.jsx';
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
     <Provider store={store}>
@@ -21,6 +22,7 @@ ReactDOM.createRoot(document.getElementById('root')).render(
             <Route exact path='/product/:id' element={<ProductScreen />} />
             <Route exact path='/cart' element={<CartScreen />} />
             <Route exact path='/login' element={<LoginScreen />} />
+            <Route exact path='/register' element={<RegisterScreen />} />
           </Route>
         </Routes>
       </Router>
