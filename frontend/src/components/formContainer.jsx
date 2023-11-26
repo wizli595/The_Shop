@@ -13,6 +13,9 @@ const FormContainer = ({ children }) => {
     </>);
 }
 FormContainer.propTypes = {
-    children: propTypes.array
+    children: propTypes.oneOfType([
+        propTypes.array,
+        propTypes.object
+    ])
 }
 export default FormContainer;
