@@ -1,6 +1,6 @@
 import { Card, ListGroup, Button } from 'react-bootstrap';
 import propTypes from 'prop-types';
-const CheckOutCard = ({ cartItems }) => {
+const CheckOutCard = ({ cartItems, check }) => {
     return (<>
         <Card >
             <ListGroup variant="flush">
@@ -16,6 +16,7 @@ const CheckOutCard = ({ cartItems }) => {
                         type='button'
                         className='btn-block'
                         disabled={cartItems.length === 0}
+                        onClick={check}
                     >
                         Proceed To Checkout
                     </Button>
@@ -24,6 +25,7 @@ const CheckOutCard = ({ cartItems }) => {
         </Card></>);
 }
 CheckOutCard.propTypes = {
-    cartItems: propTypes.array
+    cartItems: propTypes.array,
+    check: propTypes.func
 }
 export default CheckOutCard;

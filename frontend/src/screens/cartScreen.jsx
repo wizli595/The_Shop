@@ -1,5 +1,5 @@
 import { Row, Col, ListGroup } from 'react-bootstrap';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import Message from '../components/message';
 import { useDispatch, useSelector } from 'react-redux';
 import { addToCart, removeFromCart } from '../features/slices/cartSlice';
@@ -8,11 +8,15 @@ import CheckOutCard from '../components/checkOutCard';
 const CartScreen = () => {
     const { cartItems } = useSelector((state) => state.cart);
     const dispatch = useDispatch()
+    const navigate = useNavigate()
     const addToCartHandler = (product, qty) => {
         dispatch(addToCart({ ...product, qty }))
     }
     const removeFromCartHandler = (id) => {
         dispatch(removeFromCart(id))
+    }
+    const checkOutHandler = () => {
+        navigate("/login?redirect=/shipping")
     }
     return (<>
         <Row>
@@ -36,7 +40,7 @@ const CartScreen = () => {
                     )}
             </Col>
             <Col md={4}>
-                <CheckOutCard cartItems={cartItems} />
+                <CheckOutCard cartItems={cartItems} check={checkOutHandler} />
             </Col>
         </Row>
 
