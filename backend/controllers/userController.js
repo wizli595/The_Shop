@@ -12,12 +12,7 @@ const authUser = asyncHandler(async (req, res) => {
     throw new Error("Invalide email or password");
   }
   generateToken(res, usr._id);
-  res.json({
-    _id: usr._id,
-    name: usr.name,
-    email: usr.email,
-    isAdmin: usr.isAdmin,
-  });
+  res.json(usr.toJSON());
 });
 
 // @desc Register a new user
@@ -40,12 +35,7 @@ const registerUser = asyncHandler(async (req, res) => {
     throw new Error("Invalid user data");
   }
   generateToken(res, user._id);
-  res.status(201).json({
-    _id: user._id,
-    name: user.name,
-    email: user.email,
-    isAdmin: user.isAdmin,
-  });
+  res.status(201).json(user.toJSON());
 });
 
 // @desc Logout user / clear cookie
@@ -65,14 +55,31 @@ const logoutUser = asyncHandler(async (req, res) => {
 // @route GET /api/users/profile
 // @access Private
 const getUserProfile = asyncHandler(async (req, res) => {
-  res.send("get user profile");
+  const { _id: ID } = req.user._id;
+  const user = await User.findById(ID);
+  if (!user) {
+    res.status(400);
+    throw new Error("User not Found");
+  }
+  res.status(200).json(user.toJSON());
 });
 
 // @desc Update user profile
 // @route PUT /api/users/profile
 // @access Private
 const updateUserProfile = asyncHandler(async (req, res) => {
-  res.send("update user profile");
+  const { _id: ID } = req.user._id;
+  const { name, email, password } = req.body;
+  const user = await User.findByIdAndUpdate(
+    ID,
+    { name, email, password },
+    { new: true }
+  );
+  if (!user) {
+    res.status(400);
+    throw new Error("User not Found");
+  }
+  res.status(200).json(user.toJSON());
 });
 
 // @desc Get all users
