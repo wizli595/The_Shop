@@ -1,6 +1,6 @@
 import asyncHandler from "../middelware/asyncHandler.js";
 import User from "../models/UserModel.js";
-import jwt from "jsonwebtoken";
+import generateToken from "../utils/generateToken.js";
 // @desc Auth user & get token
 // @route POST /api/users/login
 // @access Public
@@ -11,17 +11,7 @@ const authUser = asyncHandler(async (req, res) => {
     res.status(401);
     throw new Error("Invalide email or password");
   }
-  //   genrate a token with JWT
-  const token = jwt.sign({ userId: usr._id }, process.env.JWT_SECRET, {
-    expiresIn: "30d",
-  });
-  //   set JWT as HTTP-Only cookie
-  res.cookie("jwt", token, {
-    httpOnly: true,
-    secure: false,
-    sameSite: "strict",
-    maxAge: 30 * 24 * 60 * 60 * 1000, // 30 days
-  });
+  generateToken(res, usr._id);
   res.json({
     _id: usr._id,
     name: usr.name,
@@ -34,7 +24,28 @@ const authUser = asyncHandler(async (req, res) => {
 // @route POST /api/users
 // @access Public
 const registerUser = asyncHandler(async (req, res) => {
-  res.send("register user");
+  const { name, email, password } = req.body;
+  const userExists = await User.findOne({ email });
+  if (userExists) {
+    res.status(400);
+    throw new Error("User already exists");
+  }
+  const user = await User.create({
+    name,
+    email,
+    password,
+  });
+  if (!user) {
+    res.status(400);
+    throw new Error("Invalid user data");
+  }
+  generateToken(res, user._id);
+  res.status(201).json({
+    _id: user._id,
+    name: user.name,
+    email: user.email,
+    isAdmin: user.isAdmin,
+  });
 });
 
 // @desc Logout user / clear cookie
