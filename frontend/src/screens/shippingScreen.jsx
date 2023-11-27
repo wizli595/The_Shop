@@ -4,6 +4,7 @@ import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { saveShippingAddress } from '../features/slices/cartSlice';
+import CheckoutSteps from '../components/checkOutSteps';
 const ShippingScreen = () => {
     const { shippingAdress } = useSelector((state) => state.cart)
     const [shippingInfo, setShippingInfo] = useState(shippingAdress || {
@@ -33,6 +34,7 @@ const ShippingScreen = () => {
     }
     return (
         <FormContainer>
+            <CheckoutSteps currentStep={2} />
             <h1>Shipping </h1>
             <Form onSubmit={submitHandler}>
                 <Form.Group controlId='address' className='my-2'>
