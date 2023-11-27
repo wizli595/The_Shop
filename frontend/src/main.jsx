@@ -14,6 +14,7 @@ import LoginScreen from './screens/loginScreen.jsx';
 import RegisterScreen from './screens/registerScreen.jsx';
 import ShippingScreen from './screens/shippingScreen.jsx';
 import PrivateRoute from './components/privateRoute.jsx';
+import PaymentScreen from './screens/paymentScreen.jsx';
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
     <Provider store={store}>
@@ -27,6 +28,7 @@ ReactDOM.createRoot(document.getElementById('root')).render(
             <Route exact path='/register' element={<RegisterScreen />} />
             <Route exact path='' element={<PrivateRoute />}>
               <Route exact path='/shipping' element={<ShippingScreen />} />
+              <Route exact path='/payment' element={<PaymentScreen />} />
             </Route>
           </Route>
         </Routes>
