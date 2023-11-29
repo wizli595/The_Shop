@@ -9,10 +9,10 @@ const orderSchema = mongoose.Schema(
     },
     orderItems: [
       {
-        name: { type: String, required: true },
-        qty: { type: Number, required: true },
-        image: { type: String, required: true },
-        price: { type: Number, required: true },
+        name: { type: mongoose.SchemaTypes.String, required: true },
+        qty: { type: mongoose.SchemaTypes.Number, required: true },
+        image: { type: mongoose.SchemaTypes.String, required: true },
+        price: { type: mongoose.SchemaTypes.Number, required: true },
         product: {
           type: mongoose.Schema.Types.ObjectId,
           required: true,
@@ -21,56 +21,56 @@ const orderSchema = mongoose.Schema(
       },
     ],
     shippingAddress: {
-      address: { type: String, required: true },
-      city: { type: String, required: true },
-      postalCode: { type: String, required: true },
-      country: { type: String, required: true },
+      address: { type: mongoose.SchemaTypes.String, required: true },
+      city: { type: mongoose.SchemaTypes.String, required: true },
+      postalCode: { type: mongoose.SchemaTypes.String, required: true },
+      country: { type: mongoose.SchemaTypes.String, required: true },
     },
     paymentMethod: {
-      type: String,
+      type: mongoose.SchemaTypes.String,
       required: true,
     },
     paymentResult: {
-      id: { type: String },
-      status: { type: String },
-      update_time: { type: String },
-      email_address: { type: String },
+      id: { type: mongoose.SchemaTypes.String },
+      status: { type: mongoose.SchemaTypes.String },
+      update_time: { type: mongoose.SchemaTypes.String },
+      email_address: { type: mongoose.SchemaTypes.String },
     },
     itemsPrice: {
-      type: Number,
+      type: mongoose.SchemaTypes.Number,
       required: true,
       default: 0.0,
     },
     taxPrice: {
-      type: Number,
+      type: mongoose.SchemaTypes.Number,
       required: true,
       default: 0.0,
     },
     shippingPrice: {
-      type: Number,
+      type: mongoose.SchemaTypes.Number,
       required: true,
       default: 0.0,
     },
     totalPrice: {
-      type: Number,
+      type: mongoose.SchemaTypes.Number,
       required: true,
       default: 0.0,
     },
     isPaid: {
-      type: Boolean,
+      type: mongoose.SchemaTypes.Boolean,
       required: true,
       default: false,
     },
     paidAt: {
-      type: Date,
+      type: mongoose.SchemaTypes.Date,
     },
     isDelivered: {
-      type: Boolean,
+      type: mongoose.SchemaTypes.Boolean,
       required: true,
       default: false,
     },
     deliveredAt: {
-      type: Date,
+      type: mongoose.SchemaTypes.Date,
     },
   },
   {
