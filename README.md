@@ -69,7 +69,7 @@ npm run data:destroy
 
 ``` 
 ### Routes List
-For an easy way the see all routes with methods and the path plus the controller of it 
+For an easy way to see all routes with their methods, paths, and their respective controllers.
 
 ```
 # Display all routes
