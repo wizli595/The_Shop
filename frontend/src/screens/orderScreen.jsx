@@ -8,7 +8,6 @@ const OrderScreen = () => {
     const { id: orderId } = useParams()
     const {
         data: order,
-        refetch,
         isLoading,
         error,
     } = useGetOrderDetailsQuery(orderId);

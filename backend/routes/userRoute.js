@@ -12,10 +12,14 @@ import {
 } from "../controllers/userController.js";
 import { admin, protect } from "../middelware/authMiddleware.js";
 const router = new Router();
-
+const protectMiddleware = protect;
+const adminMiddleware = admin;
 // in main route if is it GET get all users (admin)
 //  if is it POST register a user
-router.route("/").post(registerUser).get(protect, admin, getUsers);
+router
+  .route("/")
+  .post(registerUser)
+  .get(protectMiddleware, adminMiddleware, getUsers);
 
 // login route (email,password)
 router.post("/auth", authUser);
@@ -27,8 +31,8 @@ router.post("/logout", logoutUser);
 // if PUT update user profile
 router
   .route("/profile")
-  .get(protect, getUserProfile)
-  .put(protect, updateUserProfile);
+  .get(protectMiddleware, getUserProfile)
+  .put(protectMiddleware, updateUserProfile);
 
 // route with id params
 // if DELETE delete  user by ID
@@ -36,8 +40,8 @@ router
 // if PUT update user by ID
 router
   .route("/:id")
-  .delete(protect, admin, deleteUser)
-  .get(protect, admin, getUserByID)
-  .put(protect, admin, updateUser);
+  .delete(protectMiddleware, adminMiddleware, deleteUser)
+  .get(protectMiddleware, adminMiddleware, getUserByID)
+  .put(protectMiddleware, adminMiddleware, updateUser);
 
 export default router;

@@ -10,7 +10,8 @@
     "client": "npm run dev --prefix frontend",
     "serve": "concurrently \" npm run server \" \"npm run client \"",
     "seeder": "node backend/seeder.js ",
-    "data:destroy": "node backend/seeder.js -d "
+    "data:destroy": "node backend/seeder.js -d ",
+    "list": "node backend/listRoutes.js"
   },
   "author": "Wizli Abdessalam",
   "license": "MIT",
@@ -21,6 +22,7 @@
     "cors": "^2.8.5",
     "dotenv": "^16.3.1",
     "express": "^4.18.2",
+    "express-list-endpoints": "^6.0.0",
     "jsonwebtoken": "^9.0.2",
     "mongoose": "^8.0.1"
   },
