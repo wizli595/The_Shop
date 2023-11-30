@@ -34,6 +34,14 @@ app.get("/", (req, res) => {
 app.use("/api/products", productRoute);
 app.use("/api/users", userRoute);
 app.use("/api/orders", orderRoute);
+
+// PayPal route
+app.get("/api/config/paypal", (req, res) => {
+  res.send({
+    clientId: process.env.PAYPAL_CLIENT_ID,
+  });
+});
+
 // If no route work or the above throw an error
 app.use(notFound);
 app.use(errorHandler);
