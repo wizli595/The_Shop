@@ -19,7 +19,7 @@ const PlaceOrderScreen = () => {
         taxPrice,
         totalPrice }
         = useSelector(state => state.cart)
-    const [createOrder, { isLoading, error }] = useCreateOrderMutation()
+    const [createOrder, { isLoading, err }] = useCreateOrderMutation()
     const placeOredrHandler = async () => {
         try {
             const res = await createOrder({
@@ -30,7 +30,7 @@ const PlaceOrderScreen = () => {
             dispatch(clearCartItems())
             navigate("/order/" + res._id)
         } catch (err) {
-            toast.error(err)
+            toast.error(err.message)
         }
     }
     useEffect(() => {
@@ -132,7 +132,7 @@ const PlaceOrderScreen = () => {
                                 </Row>
                             </ListGroup.Item>
                             <ListGroup.Item>
-                                {error && (<Message variant={"danger"}>{error.date.message}</Message>)}
+                                {err && (<Message variant={"danger"}>{err?.date?.message || err.error}</Message>)}
                             </ListGroup.Item>
                             <ListGroup.Item>
                                 <Button
