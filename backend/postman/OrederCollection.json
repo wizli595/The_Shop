@@ -1,0 +1,206 @@
+{
+    "info":{
+       "name":"Oredres",
+       "schema":"https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+    },
+    "item":[
+       {
+          "name":"Admin",
+          "item":[
+             {
+                "name":"Get All Orders",
+                "id":"5bba9b30-1513-47c0-9bc4-3d4c9171c7de",
+                "protocolProfileBehavior":{
+                   "disableBodyPruning":true
+                },
+                "request":{
+                   "method":"GET",
+                   "header":[
+                      
+                   ],
+                   "url":{
+                      "raw":"{{BASE}}/orders",
+                      "host":[
+                         "{{BASE}}"
+                      ],
+                      "path":[
+                         "orders"
+                      ]
+                   }
+                },
+                "response":[
+                   
+                ]
+             },
+             {
+                "name":"Update To Deliver",
+                "id":"deb3f08b-d813-44a1-9327-946166168c24",
+                "protocolProfileBehavior":{
+                   "disableBodyPruning":true
+                },
+                "request":{
+                   "method":"PUT",
+                   "header":[
+                      
+                   ],
+                   "url":{
+                      "raw":"{{BASE}}/orders/:id/deliver",
+                      "host":[
+                         "{{BASE}}"
+                      ],
+                      "path":[
+                         "orders",
+                         ":id",
+                         "deliver"
+                      ],
+                      "variable":[
+                         {
+                            "id":"99891828-5a6b-4b05-9a6c-52b98b1b06f2",
+                            "key":"id",
+                            "value":"1"
+                         }
+                      ]
+                   }
+                },
+                "response":[
+                   
+                ]
+             }
+          ],
+          "id":"f74d2533-11ae-49c0-ab60-6eaceeecf90c"
+       },
+       {
+          "name":"Get Order By ID",
+          "id":"138f9fdf-304c-43d0-bab2-8f71d36f411a",
+          "protocolProfileBehavior":{
+             "disableBodyPruning":true
+          },
+          "request":{
+             "method":"GET",
+             "header":[
+                
+             ],
+             "url":{
+                "raw":"{{BASE}}/orders/:id",
+                "host":[
+                   "{{BASE}}"
+                ],
+                "path":[
+                   "orders",
+                   ":id"
+                ],
+                "query":[
+                   {
+                      "key":"",
+                      "value":"",
+                      "type":"text",
+                      "disabled":true
+                   }
+                ],
+                "variable":[
+                   {
+                      "key":"id",
+                      "value":"6567359f768f77755e41c93c"
+                   }
+                ]
+             }
+          },
+          "response":[
+             
+          ]
+       },
+       {
+          "name":"Create New Order",
+          "id":"22f4617d-fd9b-401b-ad83-abd66e7f2a9c",
+          "protocolProfileBehavior":{
+             "disableBodyPruning":true
+          },
+          "request":{
+             "method":"POST",
+             "header":[
+                
+             ],
+             "body":{
+                "mode":"raw",
+                "raw":"{\r\n    \"orderItems\":[]\r\n}",
+                "options":{
+                   "raw":{
+                      "language":"json"
+                   }
+                }
+             },
+             "url":{
+                "raw":"{{BASE}}/orders",
+                "host":[
+                   "{{BASE}}"
+                ],
+                "path":[
+                   "orders"
+                ]
+             }
+          },
+          "response":[
+             
+          ]
+       },
+       {
+          "name":"Get Logged In Orders",
+          "id":"16a387f2-0c56-4fde-bb8f-820fcb2ca2cc",
+          "protocolProfileBehavior":{
+             "disableBodyPruning":true
+          },
+          "request":{
+             "method":"GET",
+             "header":[
+                
+             ],
+             "url":{
+                "raw":"{{BASE}}/orders/mine",
+                "host":[
+                   "{{BASE}}"
+                ],
+                "path":[
+                   "orders",
+                   "mine"
+                ]
+             }
+          },
+          "response":[
+             
+          ]
+       },
+       {
+          "name":"Update Order To Pay",
+          "id":"e4502d38-e331-458c-ab9b-28a8c8301314",
+          "protocolProfileBehavior":{
+             "disableBodyPruning":true
+          },
+          "request":{
+             "method":"PUT",
+             "header":[
+                
+             ],
+             "url":{
+                "raw":"{{BASE}}/orders/:id/pay",
+                "host":[
+                   "{{BASE}}"
+                ],
+                "path":[
+                   "orders",
+                   ":id",
+                   "pay"
+                ],
+                "variable":[
+                   {
+                      "key":"id",
+                      "value":"6567359f768f77755e41c93c"
+                   }
+                ]
+             }
+          },
+          "response":[
+             
+          ]
+       }
+    ]
+ }

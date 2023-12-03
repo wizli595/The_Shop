@@ -1,0 +1,69 @@
+{
+    "info":{
+       "name":"Products",
+       "schema":"https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+    },
+    "item":[
+       {
+          "name":"All Products",
+          "id":"d4d83297-e65b-4836-8868-d8b575524caa",
+          "protocolProfileBehavior":{
+             "disableBodyPruning":true
+          },
+          "request":{
+             "method":"GET",
+             "header":[
+                {
+                   "key":"Accept",
+                   "value":"application/json",
+                   "type":"text"
+                }
+             ],
+             "url":{
+                "raw":"{{BASE}}/products",
+                "host":[
+                   "{{BASE}}"
+                ],
+                "path":[
+                   "products"
+                ]
+             }
+          },
+          "response":[
+             
+          ]
+       },
+       {
+          "name":"Single Profuct",
+          "id":"0fca2bdb-99cd-4962-8309-e40295d56d96",
+          "protocolProfileBehavior":{
+             "disableBodyPruning":true
+          },
+          "request":{
+             "method":"GET",
+             "header":[
+                
+             ],
+             "url":{
+                "raw":"{{BASE}}/products/:id",
+                "host":[
+                   "{{BASE}}"
+                ],
+                "path":[
+                   "products",
+                   ":id"
+                ],
+                "variable":[
+                   {
+                      "key":"id",
+                      "value":"655e32ab50bffa0adbdd50bf"
+                   }
+                ]
+             }
+          },
+          "response":[
+             
+          ]
+       }
+    ]
+ }

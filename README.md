@@ -7,7 +7,6 @@ This comprehensive MERN (MongoDB, Express.js, React.js, Node.js) e-commerce appl
 
 - [Features](#features)
 - [Usage](#Usage)
-
 - [License](#license)
 
 ## Features
@@ -76,6 +75,18 @@ For an easy way to see all routes with their methods, paths, and their respectiv
 npm run list
 
 ``` 
+### Testing The api 
+If you want just to see the api work flow and all it features you can follow the stracture i put in "The_shop/backend/postman" you have more controll and clean workspace 
+
+```
+# Run just the server side 
+npm run server
+
+# Create a workspace
+# Create the collections (don't forget the env )
+# Enjoy your surfing
+
+```
 
 
 ## License

@@ -1,0 +1,11 @@
+{
+    "name":"LOCAL",
+    "values":[
+       {
+          "key":"BASE",
+          "value":"http://localhost:5000/api",
+          "enabled":true,
+          "type":"default"
+       }
+    ]
+ }
