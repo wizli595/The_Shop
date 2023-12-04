@@ -9,8 +9,8 @@ import { useEffect } from 'react';
 import { useCreateOrderMutation } from '../features/slices/orderApiSlice';
 import { clearCartItems } from '../features/slices/cartSlice';
 const PlaceOrderScreen = () => {
-    const navigate = useNavigate()
-    const dispatch = useDispatch()
+    const navigate = useNavigate();
+    const dispatch = useDispatch();
     const { cartItems,
         shippingAdress: shippingAddress,
         paymentMethod,
@@ -18,28 +18,28 @@ const PlaceOrderScreen = () => {
         shippingPrice,
         taxPrice,
         totalPrice }
-        = useSelector(state => state.cart)
-    const [createOrder, { isLoading, err }] = useCreateOrderMutation()
+        = useSelector(state => state.cart);
+    const [createOrder, { isLoading, error }] = useCreateOrderMutation();
     const placeOredrHandler = async () => {
         try {
             const res = await createOrder({
                 orderItems: cartItems,
                 shippingAddress,
                 paymentMethod
-            }).unwrap()
-            dispatch(clearCartItems())
-            navigate("/order/" + res._id)
+            }).unwrap();
+            dispatch(clearCartItems());
+            navigate("/order/" + res._id);
         } catch (err) {
-            toast.error(err.message)
+            toast.error(err?.data?.message || err.error);
         }
-    }
+    };
     useEffect(() => {
         if (!shippingAddress.address) {
-            navigate("/shipping")
+            navigate("/shipping");
         } else if (!paymentMethod) {
-            navigate("/payment")
+            navigate("/payment");
         }
-    }, [shippingAddress, navigate, paymentMethod])
+    }, [shippingAddress, navigate, paymentMethod]);
     return (
         <>
             <CheckOutSteps currentStep={4} />
@@ -132,7 +132,7 @@ const PlaceOrderScreen = () => {
                                 </Row>
                             </ListGroup.Item>
                             <ListGroup.Item>
-                                {err && (<Message variant={"danger"}>{err?.date?.message || err.error}</Message>)}
+                                {error && (<Message variant={"danger"}>{error?.data?.message || error.message}</Message>)}
                             </ListGroup.Item>
                             <ListGroup.Item>
                                 <Button
@@ -151,6 +151,6 @@ const PlaceOrderScreen = () => {
             </Row>
         </>
     );
-}
+};
 
 export default PlaceOrderScreen;
