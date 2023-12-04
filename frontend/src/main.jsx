@@ -19,6 +19,7 @@ import PaymentScreen from './screens/paymentScreen.jsx';
 
 import PlaceOrderScreen from './screens/placeorderScreen.jsx';
 import OrderScreen from './screens/orderScreen.jsx';
+import ProfileScreen from './screens/profileScreen.jsx';
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
     <Provider store={store}>
@@ -36,6 +37,7 @@ ReactDOM.createRoot(document.getElementById('root')).render(
                 <Route exact path='/payment' element={<PaymentScreen />} />
                 <Route exact path='/placeorder' element={<PlaceOrderScreen />} />
                 <Route exact path='/order/:id' element={<OrderScreen />} />
+                <Route exact path='/profile' element={<ProfileScreen />} />
               </Route>
             </Route>
           </Routes>
