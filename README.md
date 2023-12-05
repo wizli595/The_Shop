@@ -36,9 +36,9 @@ PORT = 5000
 MONGO_URI = your mongodb uri
 JWT_SECRET = '******'
 PAYPAL_CLIENT_ID= 'get it from paypalsandbox'
- [paypal docs](https://developer.paypal.com/){:target="_blank"}
 
 ``` 
++ [paypal docs](https://developer.paypal.com/){:target="_blank"}
 + The JWT_SECRET is changable 
 
 ### Install Dependecies (frontend & backend)
