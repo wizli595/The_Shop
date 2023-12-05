@@ -22,7 +22,7 @@ const getProductById = asyncHandler(async (req, res) => {
 });
 
 // @desc Create a new Product
-// @route GET /api/products
+// @route POST /api/products
 // @access Private/Admin
 const createProduct = asyncHandler(async (req, res) => {
   const product = Product.create({
@@ -40,4 +40,32 @@ const createProduct = asyncHandler(async (req, res) => {
   res.status(404);
   throw new Error("somthing went wrong");
 });
-export { getProductById, getProducts, createProduct };
+
+// @desc Update Product by ID
+// @route PUT /api/products/:id
+// @access Private/Admin
+const updateProduct = asyncHandler(async (req, res) => {
+  const { id } = req.params;
+  const { name, price, description, image, brand, category, countInStock } =
+    req.body;
+
+  const product = await Product.findByIdAndUpdate(
+    id,
+    {
+      name,
+      price,
+      description,
+      image,
+      brand,
+      category,
+      countInStock,
+    },
+    { new: true }
+  );
+  if (!product) {
+    res.status(404);
+    throw new Error("Product not Found");
+  }
+  res.status(200).json(product);
+});
+export { getProductById, getProducts, createProduct, updateProduct };
