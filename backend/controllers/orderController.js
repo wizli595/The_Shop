@@ -92,7 +92,16 @@ const updateOrderToPaid = asyncHandler(async (req, res) => {
 // @route  PUT /api/orders/:id/deliver
 // @access Private/Admin
 const updateOrderToDelivered = asyncHandler(async (req, res) => {
-  return res.send("update order to deliverd");
+  const { id } = req.params;
+  const order = await Order.findByIdAndUpdate(id, {
+    isDelivered: true,
+    deliveredAt: Date.now(),
+  });
+  if (!order) {
+    res.status(404);
+    throw new Error("faild too bad");
+  }
+  res.status(200).json(order);
 });
 
 // @desc   Get logged in user orders
@@ -107,7 +116,8 @@ const getMyOrders = asyncHandler(async (req, res) => {
 // @route  GET /api/orders/:id/deliver
 // @access Private/Admin
 const getOrders = asyncHandler(async (req, res) => {
-  return res.send("get all orders");
+  const orders = await Order.find().populate("user", "id name");
+  res.status(200).json(orders);
 });
 
 export {

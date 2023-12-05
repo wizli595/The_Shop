@@ -6,23 +6,23 @@ import { Link, useNavigate } from 'react-router-dom';
 import { useLogoutMutation } from '../features/slices/usersApiSlice';
 import { logout } from '../features/slices/authSlice';
 const Header = () => {
-    const { cartItems } = useSelector((state) => state.cart)
-    const { userInfo } = useSelector((state) => state.auth)
+    const { cartItems } = useSelector((state) => state.cart);
+    const { userInfo } = useSelector((state) => state.auth);
 
-    const dispatch = useDispatch()
-    const navigate = useNavigate()
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
 
-    const [logoutApiCall] = useLogoutMutation()
+    const [logoutApiCall] = useLogoutMutation();
 
     const logoutHandler = async () => {
         try {
             await logoutApiCall().unwrap();
             dispatch(logout());
-            navigate("/login")
+            navigate("/login");
         } catch (err) {
-            console.log(err)
+            console.log(err);
         }
-    }
+    };
     return (<>
         <header>
             <Navbar bg='dark' variant='dark' expand='md' collapseOnSelect>
@@ -51,6 +51,13 @@ const Header = () => {
                                 </Nav.Link>
                             )
                             }
+                            {userInfo && userInfo.isAdmin && (
+                                <NavDropdown title={userInfo.name + " menu"} id="admin" >
+                                    <NavDropdown.Item as={Link} to={"/admin/orderlist"}>Orders</NavDropdown.Item>
+                                    <NavDropdown.Item as={Link} to={"/admin/userlist"}>Users</NavDropdown.Item>
+                                    <NavDropdown.Item as={Link} to={"/admin/productlist"}>Products</NavDropdown.Item>
+                                </NavDropdown>
+                            )}
                         </Nav>
                     </Navbar.Collapse>
                 </Container>
@@ -58,6 +65,6 @@ const Header = () => {
         </header >
 
     </>);
-}
+};
 
 export default Header;

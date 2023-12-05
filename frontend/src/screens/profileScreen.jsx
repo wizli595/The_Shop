@@ -9,6 +9,7 @@ import { useProfileMutation } from '../features/slices/usersApiSlice';
 import { useGetMyOrdersQuery } from '../features/slices/orderApiSlice';
 import { setCredentials } from '../features/slices/authSlice';
 import { FaTimes } from 'react-icons/fa';
+import TableHead from '../components/tableHead';
 const ProfileScreen = () => {
     const { userInfo } = useSelector(state => (state.auth));
 
@@ -107,16 +108,7 @@ const ProfileScreen = () => {
                     error ? (<Message variant={"danger"}>{error?.data?.message || error?.error}</Message>) :
                         (
                             <Table striped hover responsive className='table-sm'>
-                                <thead>
-                                    <tr className='text-uppercase'>
-                                        <th ><strong>id</strong></th>
-                                        <th><strong>date</strong></th>
-                                        <th><strong>total</strong></th>
-                                        <th><strong>paid</strong></th>
-                                        <th><strong>delivered</strong></th>
-                                        <th></th>
-                                    </tr>
-                                </thead>
+                                <TableHead />
                                 <tbody>
                                     {
                                         orders.map(e => (
