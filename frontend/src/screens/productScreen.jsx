@@ -9,14 +9,14 @@ import { addToCart } from '../features/slices/cartSlice';
 import { useState } from 'react';
 const ProductScreen = () => {
     const { id: productID } = useParams();
-    const [qty, setQty] = useState(1)
-    const { data: SingleProd, isLoading, err } = useGetProductDetailsQuery(productID)
-    const dispatch = useDispatch()
-    const navigate = useNavigate()
+    const [qty, setQty] = useState(1);
+    const { data: SingleProd, isLoading, error: err } = useGetProductDetailsQuery(productID);
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
     const addToCartHandler = () => {
         dispatch(addToCart({ ...SingleProd, qty }));
         navigate('/cart');
-    }
+    };
     return (<>
         <Link className='btn btn-light my-3' to='/'>
             Go Back
@@ -92,6 +92,6 @@ const ProductScreen = () => {
                     </Row>
                 </>)}
     </>);
-}
+};
 
 export default ProductScreen;
