@@ -16,13 +16,13 @@ This comprehensive MERN (MongoDB, Express.js, React.js, Node.js) e-commerce appl
 - Top products carousel
 - Product pagination (in progress 🔥)
 - Product search feature (in progress 🔥)
-- User profile with orders (in progress 🔥)
-- Admin product management (in progress 🔥)
+- User profile with orders 
+- Admin product management 
 - Admin user management (in progress 🔥)
-- Admin Order details page (in progress 🔥)
-- Mark orders as delivered option (in progress 🔥)
-- Checkout process (shipping, payment method, etc) (in progress 🔥)
-- PayPal / credit card integration (in progress 🔥)
+- Admin Order details page 
+- Mark orders as delivered option 
+- Checkout process (shipping, payment method, etc) 
+- PayPal / credit card integration 
 - Database seeder (products & users) 
 
 ## Usage
@@ -34,7 +34,8 @@ create a `.env` file and fill it with the following
 ```
 PORT = 5000
 MONGO_URI = your mongodb uri
-JWT_SECRET = 'abc123'
+JWT_SECRET = '******'
+PAYPAL_CLIENT_ID= 'get it from paypalsandbox'=> [paypal docs](https://developer.paypal.com/){:target="_blank"}
 
 ``` 
 + The JWT_SECRET is changable 
