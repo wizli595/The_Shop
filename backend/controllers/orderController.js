@@ -20,6 +20,15 @@ const addOrderItems = asyncHandler(async (req, res) => {
       const matchingFromDB = itemsFromDB.find(
         (itemDB) => itemDB._id.toString() === item._id
       );
+      const quantityOrdered = item.qty;
+      const newCountInStock = matchingFromDB.countInStock - quantityOrdered;
+
+      // Update the countInStock of the product in the database
+      Product.findByIdAndUpdate(
+        item._id,
+        { countInStock: newCountInStock },
+        { new: true }
+      ).exec();
       return {
         ...item,
         product: item._id,
