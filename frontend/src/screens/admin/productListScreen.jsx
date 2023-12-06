@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom';
 import { Table, Button, Row, Col } from 'react-bootstrap';
 import Message from '../../components/message';
 import Loader from '../../components/Loader';
-import { useCreateProductMutation, useGetProductsQuery } from '../../features/slices/productsApiSlice';
+import { useCreateProductMutation, useDeleteProductMutation, useGetProductsQuery } from '../../features/slices/productsApiSlice';
 import { FaTrash, FaEdit } from 'react-icons/fa';
 import { toast } from 'react-toastify';
 
@@ -11,6 +11,8 @@ const ProductListScreen = () => {
     const { data: products, isLoading, error, refetch } = useGetProductsQuery();
 
     const [createProduct, { isLoading: loadingCreat, error: creatError }] = useCreateProductMutation();
+
+    const [deleteProduct, { isLoading: deleteLoading }] = useDeleteProductMutation();
 
     const createProductHandler = async () => {
         if (window.confirm("Are you sure you want to create a new product")) {
@@ -24,7 +26,18 @@ const ProductListScreen = () => {
         }
     };
 
-    const deleteHandler = async () => { };
+    const deleteHandler = async (id) => {
+        if (window.confirm("Are you sure ??")) {
+            try {
+                await deleteProduct(id);
+                refetch();
+                toast.warning("DELETED");
+            } catch (err) {
+                console.log(err);
+                toast.error(err?.data?.message || err.error);
+            }
+        }
+    };
     return (<>
         <Row>
             <Col>
@@ -37,6 +50,7 @@ const ProductListScreen = () => {
             </Col>
         </Row>
         {loadingCreat && <Loader />}
+        {deleteLoading && <Loader />}
         {isLoading ?
             (<Loader />) : error ?
                 (<Message variant={"danger"}>{error?.data?.message}</Message>) :
@@ -72,6 +86,7 @@ const ProductListScreen = () => {
                                             <Button
                                                 className='btn-sm'
                                                 variant='danger'
+                                                onClick={() => deleteHandler(e._id)}
                                             >
                                                 <FaTrash color='white' />
                                             </Button>
