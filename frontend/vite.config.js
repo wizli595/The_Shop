@@ -10,6 +10,10 @@ export default defineConfig({
         target: "http://localhost:5000",
         debug: true,
       },
+      "/uploads": {
+        target: "http://localhost:5000",
+        debug: true,
+      },
     },
     // hmr: false, //make the proxy work more offician and ctrl+s not work
   },
