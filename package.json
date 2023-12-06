@@ -11,7 +11,8 @@
     "serve": "concurrently \" npm run server \" \"npm run client \"",
     "seeder": "node backend/seeder.js ",
     "data:destroy": "node backend/seeder.js -d ",
-    "list": "node backend/listRoutes.js"
+    "list": "node backend/listRoutes.js",
+    "make": "node backend/maker.js"
   },
   "author": "Wizli Abdessalam",
   "license": "MIT",
@@ -26,7 +27,9 @@
     "express-list-endpoints": "^6.0.0",
     "jsonwebtoken": "^9.0.2",
     "mongoose": "^8.0.1",
-    "multer": "^1.4.5-lts.1"
+    "multer": "^1.4.5-lts.1",
+    "yargs": "^17.7.2",
+    "yargs-parser": "^21.1.1"
   },
   "devDependencies": {
     "concurrently": "^8.2.2",

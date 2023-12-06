@@ -76,7 +76,17 @@ For an easy way to see all routes with their methods, paths, and their respectiv
 # Display all routes
 npm run list
 
-``` 
+```
+### Make a Controller
+A custom command for creating a controller with the necessary imports (still in progress)
+```
+# Create a new Controller
+npm run make [your Controller]
+
+```
+
+
+
 ### Testing The api 
 If you want just to see the api work flow and all it features you can follow the stracture i put in "The_shop/backend/postman" you have more controll and clean workspace 
 
