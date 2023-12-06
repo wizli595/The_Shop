@@ -18,7 +18,7 @@ This comprehensive MERN (MongoDB, Express.js, React.js, Node.js) e-commerce appl
 - Product search feature (in progress 🔥)
 - User profile with orders 
 - Admin product management 
-- Admin user management (in progress 🔥)
+- Admin user management 
 - Admin Order details page 
 - Mark orders as delivered option 
 - Checkout process (shipping, payment method, etc) 
