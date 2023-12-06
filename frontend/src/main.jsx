@@ -25,6 +25,7 @@ import OrderListScreen from './screens/admin/orderListScreen.jsx';
 import ProductListScreen from './screens/admin/productListScreen.jsx';
 import ProductEditScreen from './screens/admin/productEditScreen.jsx';
 import UserListScreen from './screens/admin/userListScreen.jsx';
+import UserEditScreen from './screens/admin/userEditScreen.jsx';
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
     <Provider store={store}>
@@ -49,6 +50,7 @@ ReactDOM.createRoot(document.getElementById('root')).render(
                 <Route exact path='/admin/productlist' element={<ProductListScreen />} />
                 <Route exact path='/admin/product/:id/edit' element={<ProductEditScreen />} />
                 <Route exact path='/admin/userlist' element={<UserListScreen />} />
+                <Route exact path='/admin/user/:id/edit' element={<UserEditScreen />} />
 
               </Route>
             </Route>

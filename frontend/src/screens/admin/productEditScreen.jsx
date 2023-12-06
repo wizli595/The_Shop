@@ -46,7 +46,6 @@ const ProductEditScreen = () => {
             refetch();
             navigate("/admin/productlist");
         } catch (err) {
-            console.log(err);
             toast.error(err?.data?.message || err.error);
         }
     };

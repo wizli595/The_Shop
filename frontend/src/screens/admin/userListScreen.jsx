@@ -62,7 +62,7 @@ const UserListScreen = () => {
                                         <Button
                                             className='btn-sm m-1'
                                             as={Link}
-                                            to={"/user/" + e._id + "/edit"}
+                                            to={"/admin/user/" + e._id + "/edit"}
                                             variant='light'
                                         >
                                             <FaEdit />
