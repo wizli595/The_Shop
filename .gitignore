@@ -11,7 +11,7 @@ node_modules
 dist
 dist-ssr
 *.local
-costom.css
+bootsrap.costom.css
 # Editor directories and files
 .env
 .vscode/*
