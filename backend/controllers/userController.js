@@ -13,7 +13,9 @@ const authUser = asyncHandler(async (req, res) => {
     throw new Error("Invalide email or password");
   }
   generateToken(res, usr._id);
-  res.json(usr.toJSON());
+
+  // if (!usr.isAdmin)
+  return res.status(201).json(usr.toJSON());
 });
 
 // @desc Register a new user
@@ -36,6 +38,7 @@ const registerUser = asyncHandler(async (req, res) => {
     throw new Error("Invalid user data");
   }
   generateToken(res, user._id);
+  // if(!user.isAdmin) return res.status(201).json({name:user.name,email:})
   res.status(201).json(user.toJSON());
 });
 
