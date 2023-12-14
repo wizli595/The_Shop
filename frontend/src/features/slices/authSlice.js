@@ -10,6 +10,7 @@ const authSlice = createSlice({
   initialState,
   reducers: {
     setCredentials: (state, actions) => {
+      // fix is admin it should be disable
       state.userInfo = actions.payload;
       localStorage.setItem("userInfo", encryptObj(state.userInfo));
     },

@@ -32,7 +32,6 @@ userSchema.methods.toJSON = function () {
 
   // Remove fields you don't want to expose
   delete userObject.password;
-  if (!userObject.isAdmin) delete userObject.isAdmin;
 
   return userObject;
 };
