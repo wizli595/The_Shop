@@ -32,7 +32,8 @@ userSchema.methods.toJSON = function () {
 
   // Remove fields you don't want to expose
   delete userObject.password;
-
+  //
+  // delete userObject.isAdmin;
   return userObject;
 };
 userSchema.methods.matchPassword = async function (enteredPassword) {
