@@ -1,7 +1,8 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { decryptObj, encryptObj } from "../../utils/localStorageUtils";
 const initialState = {
   userInfo: localStorage.getItem("userInfo")
-    ? JSON.parse(localStorage.getItem("userInfo"))
+    ? decryptObj(localStorage.getItem("userInfo"))
     : null,
 };
 const authSlice = createSlice({
@@ -11,7 +12,7 @@ const authSlice = createSlice({
     setCredentials: (state, actions) => {
       // fix is admin it should be disable
       state.userInfo = actions.payload;
-      localStorage.setItem("userInfo", JSON.stringify(state.userInfo));
+      localStorage.setItem("userInfo", encryptObj(state.userInfo));
     },
     // eslint-disable-next-line no-unused-vars
     logout: (state, actions) => {

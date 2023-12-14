@@ -4,8 +4,8 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import App from './App.jsx';
 import HomeScreen from './screens/homeScreen.jsx';
 import ProductScreen from './screens/productScreen.jsx';
-// import 'bootstrap/dist/css/bootstrap.min.css'; // old version
-import './assets/styles/bootsrap.costom.css';
+// import 'bootstrap/scss/bootstrap.scss'; // old version
+import './assets/styles/bootstrap.costom.css';
 import './assets/styles/index.css';
 import { PayPalScriptProvider } from '@paypal/react-paypal-js';
 import { Provider } from 'react-redux';

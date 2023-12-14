@@ -26,14 +26,13 @@ const userSchema = mongoose.Schema(
     versionKey: false,
   }
 );
-// Instance method to transform the user document before sending it
+
 userSchema.methods.toJSON = function () {
   const userObject = this.toObject();
 
   // Remove fields you don't want to expose
   delete userObject.password;
-  //
-  // delete userObject.isAdmin;
+
   return userObject;
 };
 userSchema.methods.matchPassword = async function (enteredPassword) {
