@@ -1,16 +1,18 @@
-import { Link } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import { Table, Button, Row, Col } from 'react-bootstrap';
 import Message from '../../components/message';
 import Loader from '../../components/Loader';
 import { useCreateProductMutation, useDeleteProductMutation, useGetProductsQuery } from '../../features/slices/productsApiSlice';
 import { FaTrash, FaEdit } from 'react-icons/fa';
 import { toast } from 'react-toastify';
+import Paginate from '../../components/paginate';
 
 
 const ProductListScreen = () => {
-    const { data: products, isLoading, error, refetch } = useGetProductsQuery();
+    const { pageNumber } = useParams()
+    const { data, isLoading, error, refetch } = useGetProductsQuery({ pageNumber });
 
-    const [createProduct, { isLoading: loadingCreat, error: creatError }] = useCreateProductMutation();
+    const [createProduct, { isLoading: loadingCreat }] = useCreateProductMutation();
 
     const [deleteProduct, { isLoading: deleteLoading }] = useDeleteProductMutation();
 
@@ -69,7 +71,7 @@ const ProductListScreen = () => {
                         </thead>
                         <tbody>
                             {
-                                products.map(e => (
+                                data.products.map(e => (
                                     <tr key={e._id}>
                                         <td>{e._id}</td>
                                         <td>{e.name}</td>
@@ -96,6 +98,9 @@ const ProductListScreen = () => {
                             }
                         </tbody>
                     </Table>
+                    <div className='d-flex justify-content-center align-items-center'>
+                        <Paginate page={data.page} pages={data.pages} isAdmin={true} />
+                    </div>
                 </>)
         }
 

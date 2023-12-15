@@ -1,20 +1,19 @@
 import { Row } from 'react-bootstrap';
 import Product from './product';
-import { useGetProductsQuery } from '@/features/slices/productsApiSlice';
-import Loader from './Loader';
-import Message from './message';
-const ProductList = () => {
-    const { data: products, isLoading, err } = useGetProductsQuery();
+import propTypes from 'prop-types';
+
+const ProductList = ({ products }) => {
+
     return (<>
-        {isLoading ? (<Loader />) : err ?
-            (<Message variant={"danger"}>{err?.data?.message || err.error}</Message>) : (
-                <>
-                    <Row>
-                        {products.map((e, i) => <Product key={i} product={e} />)}
-                    </Row>
-                </>
-            )}
+
+        <Row>
+            {products.map((e, i) => <Product key={i} product={e} />)}
+        </Row>
+
     </>);
+}
+ProductList.propTypes = {
+    products: propTypes.array
 }
 
 export default ProductList;

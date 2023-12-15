@@ -34,6 +34,7 @@ ReactDOM.createRoot(document.getElementById('root')).render(
           <Routes>
             <Route exact path='/' element={<App />}>
               <Route exact path='/' element={<HomeScreen />} />
+              <Route exact path='/page/:pageNumber' element={<HomeScreen />} />
               <Route exact path='/product/:id' element={<ProductScreen />} />
               <Route exact path='/cart' element={<CartScreen />} />
               <Route exact path='/login' element={<LoginScreen />} />
@@ -48,6 +49,7 @@ ReactDOM.createRoot(document.getElementById('root')).render(
               <Route exact path='' element={<AdminRoute />}>
                 <Route exact path='/admin/orderlist' element={<OrderListScreen />} />
                 <Route exact path='/admin/productlist' element={<ProductListScreen />} />
+                <Route exact path='/admin/productlist/:pageNumber' element={<ProductListScreen />} />
                 <Route exact path='/admin/product/:id/edit' element={<ProductEditScreen />} />
                 <Route exact path='/admin/userlist' element={<UserListScreen />} />
                 <Route exact path='/admin/user/:id/edit' element={<UserEditScreen />} />
