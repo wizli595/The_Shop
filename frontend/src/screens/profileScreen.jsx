@@ -123,8 +123,8 @@ const ProfileScreen = () => {
                                                     }
                                                 </td>
                                                 <td>
-                                                    {e.isdelivered ?
-                                                        (e.delivered.substring(0, 10)) :
+                                                    {e.isDelivered ?
+                                                        (e.deliveredAt.substring(0, 10)) :
                                                         (<FaTimes style={{ color: "red" }} />)
                                                     }
                                                 </td>

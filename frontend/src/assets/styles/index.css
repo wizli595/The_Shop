@@ -39,7 +39,7 @@ table th {
 
 .review h2 {
   font-size: 24px;
-  background: #f4f4f4;
+  /* background: #f4f4f4; */
   padding: 10px;
   border: 1px solid #ddd;
 }

@@ -1,22 +1,58 @@
-import { Card, Col, Image, ListGroup, Row, Button, Form } from 'react-bootstrap';
+import { Card, Col, Image, ListGroup, Row, Button, Form, FormGroup } from 'react-bootstrap';
 import { Link, useNavigate, useParams } from "react-router-dom";
 import Rating from '@/components/rating';
-import { useGetProductDetailsQuery } from '../features/slices/productsApiSlice';
+import { useCreateProductReviewMutation, useGetProductDetailsQuery } from '../features/slices/productsApiSlice';
 import Loader from '../components/Loader';
 import Message from '../components/message';
-import { useDispatch } from 'react-redux';
+import { toast } from 'react-toastify';
+import { useDispatch, useSelector } from 'react-redux';
 import { addToCart } from '../features/slices/cartSlice';
 import { useState } from 'react';
+
 const ProductScreen = () => {
+
     const { id: productID } = useParams();
+
     const [qty, setQty] = useState(1);
-    const { data: SingleProd, isLoading, error: err } = useGetProductDetailsQuery(productID);
+
+    const [review, setReview] = useState({
+        comment: "",
+        rating: ""
+    });
+
+    const ratingList = ["poor", "fair", "good", "very good", "exellent"];
+
+    const [createReview, { isLoading: loadingReview }] = useCreateProductReviewMutation();
+
+    const { data: SingleProd, isLoading, error: err, refetch } = useGetProductDetailsQuery(productID);
+
+    const { userInfo } = useSelector(state => state.auth);
+
     const dispatch = useDispatch();
+
     const navigate = useNavigate();
+
     const addToCartHandler = () => {
         dispatch(addToCart({ ...SingleProd, qty }));
         navigate('/cart');
     };
+    const changeHandler = (e) => {
+        const { name, value } = e.target;
+        setReview(prv => ({ ...prv, [name]: value }));
+    };
+
+    const submitHandler = async (e) => {
+        e.preventDefault();
+
+        try {
+            await createReview({ id: productID, ...review }).unwrap();
+            refetch();
+            toast.success("Review been submited");
+        } catch (errr) {
+            toast.error(errr?.data?.message || errr.error);
+        }
+    };
+
     return (<>
         <Link className='btn btn-light my-3' to='/'>
             Go Back
@@ -89,6 +125,67 @@ const ProductScreen = () => {
                                 </ListGroup>
                             </Card>
                         </Col>
+                    </Row>
+                    <Row className='review'>
+                        <Col md={6}>
+                            {SingleProd.reviews.length === 0 && <Message>No Reviews yet</Message>}
+                            <ListGroup variant='flush'>
+                                <h1>All Reviews</h1>
+                                {
+                                    SingleProd.reviews.map((e) => (
+                                        <ListGroup.Item key={e._id}>
+                                            <strong>{e.name}</strong>
+                                            <p>{e.comment}</p>
+                                            <p>{e.rating}</p>
+                                        </ListGroup.Item>
+                                    )
+                                    )
+                                }
+                                <ListGroup.Item>
+                                    <h2>Write a Customer Review</h2>
+                                    {loadingReview && <Loader />}
+                                    {
+                                        userInfo ? (<>
+                                            <Form onSubmit={submitHandler}>
+                                                <FormGroup>
+                                                    <Form.Control
+                                                        as={"select"}
+                                                        value={review.rating}
+                                                        name='rating'
+                                                        onChange={changeHandler}
+                                                    >
+                                                        <option value="">select your rating</option>
+                                                        {ratingList.map((e, i) => (<option key={i} value={i + 1}>{e}</option>))}
+                                                    </Form.Control>
+                                                </FormGroup>
+
+                                                <FormGroup>
+                                                    <Form.Label>comment</Form.Label>
+                                                    <Form.Control
+                                                        type='text'
+                                                        as={"textarea"}
+                                                        placeholder='Enter a Comment'
+                                                        name='comment'
+                                                        value={review.comment}
+                                                        onChange={changeHandler}
+                                                    />
+                                                </FormGroup>
+                                                <Button
+                                                    type='submit'
+                                                    disabled={loadingReview}
+                                                >comment</Button>
+                                            </Form>
+                                        </>)
+                                            :
+                                            (<Message>Login befor u can write</Message>)
+                                    }
+                                </ListGroup.Item>
+
+
+                            </ListGroup>
+
+                        </Col>
+
                     </Row>
                 </>)}
     </>);
