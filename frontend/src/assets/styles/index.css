@@ -61,3 +61,7 @@ table th {
   bottom: 0;
   background: rgba(0, 0, 0, 0.5);
 }
+.img {
+  object-fit: fill;
+  /* width: 100%; */
+}
