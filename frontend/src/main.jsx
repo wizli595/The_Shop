@@ -16,7 +16,7 @@ import RegisterScreen from './screens/registerScreen.jsx';
 import ShippingScreen from './screens/shippingScreen.jsx';
 import PrivateRoute from './components/privateRoute.jsx';
 import PaymentScreen from './screens/paymentScreen.jsx';
-
+import { HelmetProvider } from 'react-helmet-async';
 import PlaceOrderScreen from './screens/placeorderScreen.jsx';
 import OrderScreen from './screens/orderScreen.jsx';
 import ProfileScreen from './screens/profileScreen.jsx';
@@ -28,40 +28,42 @@ import UserListScreen from './screens/admin/userListScreen.jsx';
 import UserEditScreen from './screens/admin/userEditScreen.jsx';
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
-    <Provider store={store}>
-      <PayPalScriptProvider deferLoading={true}>
-        <Router>
-          <Routes>
-            <Route exact path='/' element={<App />}>
-              <Route exact path='/' element={<HomeScreen />} />
-              <Route exact path='/search/:keyword' element={<HomeScreen />} />
-              <Route exact path='/page/:pageNumber' element={<HomeScreen />} />
-              <Route exact path='/search/:keyword/page/:pageNumber' element={<HomeScreen />} />
-              <Route exact path='/product/:id' element={<ProductScreen />} />
-              <Route exact path='/cart' element={<CartScreen />} />
-              <Route exact path='/login' element={<LoginScreen />} />
-              <Route exact path='/register' element={<RegisterScreen />} />
-              <Route exact path='' element={<PrivateRoute />}>
-                <Route exact path='/shipping' element={<ShippingScreen />} />
-                <Route exact path='/payment' element={<PaymentScreen />} />
-                <Route exact path='/placeorder' element={<PlaceOrderScreen />} />
-                <Route exact path='/order/:id' element={<OrderScreen />} />
-                <Route exact path='/profile' element={<ProfileScreen />} />
-              </Route>
-              <Route exact path='' element={<AdminRoute />}>
-                <Route exact path='/admin/orderlist' element={<OrderListScreen />} />
-                <Route exact path='/admin/productlist' element={<ProductListScreen />} />
-                <Route exact path='/admin/productlist/:pageNumber' element={<ProductListScreen />} />
-                <Route exact path='/admin/product/:id/edit' element={<ProductEditScreen />} />
-                <Route exact path='/admin/userlist' element={<UserListScreen />} />
-                <Route exact path='/admin/user/:id/edit' element={<UserEditScreen />} />
+    <HelmetProvider>
+      <Provider store={store}>
+        <PayPalScriptProvider deferLoading={true}>
+          <Router>
+            <Routes>
+              <Route exact path='/' element={<App />}>
+                <Route exact path='/' element={<HomeScreen />} />
+                <Route exact path='/search/:keyword' element={<HomeScreen />} />
+                <Route exact path='/page/:pageNumber' element={<HomeScreen />} />
+                <Route exact path='/search/:keyword/page/:pageNumber' element={<HomeScreen />} />
+                <Route exact path='/product/:id' element={<ProductScreen />} />
+                <Route exact path='/cart' element={<CartScreen />} />
+                <Route exact path='/login' element={<LoginScreen />} />
+                <Route exact path='/register' element={<RegisterScreen />} />
+                <Route exact path='' element={<PrivateRoute />}>
+                  <Route exact path='/shipping' element={<ShippingScreen />} />
+                  <Route exact path='/payment' element={<PaymentScreen />} />
+                  <Route exact path='/placeorder' element={<PlaceOrderScreen />} />
+                  <Route exact path='/order/:id' element={<OrderScreen />} />
+                  <Route exact path='/profile' element={<ProfileScreen />} />
+                </Route>
+                <Route exact path='' element={<AdminRoute />}>
+                  <Route exact path='/admin/orderlist' element={<OrderListScreen />} />
+                  <Route exact path='/admin/productlist' element={<ProductListScreen />} />
+                  <Route exact path='/admin/productlist/:pageNumber' element={<ProductListScreen />} />
+                  <Route exact path='/admin/product/:id/edit' element={<ProductEditScreen />} />
+                  <Route exact path='/admin/userlist' element={<UserListScreen />} />
+                  <Route exact path='/admin/user/:id/edit' element={<UserEditScreen />} />
 
+                </Route>
               </Route>
-            </Route>
-          </Routes>
-        </Router>
-      </PayPalScriptProvider>
-    </Provider>
+            </Routes>
+          </Router>
+        </PayPalScriptProvider>
+      </Provider>
+    </HelmetProvider>
 
   </React.StrictMode>,
 );

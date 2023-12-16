@@ -202,35 +202,35 @@ const OrderScreen = () => {
                                         </Row>
                                     </ListGroup.Item>
                                     {!userInfo.isAdmin ?
-                                        !order.isPaid &&
+                                        !order.isPaid ?
                                             order.paymentMethod === "whatsapp"
-                                            ? (
-                                                <WhatsappBtn />
-                                            ) :
-                                            (
-                                                <ListGroup.Item>
-                                                    {loadingPay && <Loader />}
-                                                    {isPending ? (<Loader />) : (
-                                                        <div>
-                                                            {/* TEST ONLY */}
-                                                            {/* <Button
+                                                ? (
+                                                    <WhatsappBtn />
+                                                ) :
+                                                (
+                                                    <ListGroup.Item>
+                                                        {loadingPay && <Loader />}
+                                                        {isPending ? (<Loader />) : (
+                                                            <div>
+                                                                {/* TEST ONLY */}
+                                                                {/* <Button
                                                             style={{ marginBottom: '10px' }}
                                                             onClick={onApproveTest}
                                                         >
                                                             Test Pay Order
                                                         </Button> */}
 
-                                                            <div>
-                                                                <PayPalButtons
-                                                                    createOrder={createOrder}
-                                                                    onApprove={onApprove}
-                                                                    onError={onError}
-                                                                ></PayPalButtons>
+                                                                <div>
+                                                                    <PayPalButtons
+                                                                        createOrder={createOrder}
+                                                                        onApprove={onApprove}
+                                                                        onError={onError}
+                                                                    ></PayPalButtons>
+                                                                </div>
                                                             </div>
-                                                        </div>
-                                                    )}
-                                                </ListGroup.Item>
-                                            ) : ""
+                                                        )}
+                                                    </ListGroup.Item>
+                                                ) : "" : ""
                                     }
                                     {loadingPay && <Loader />}
                                     {
