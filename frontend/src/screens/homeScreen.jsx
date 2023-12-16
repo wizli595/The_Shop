@@ -5,6 +5,7 @@ import { useParams, Link } from 'react-router-dom';
 import { useGetProductsQuery } from '../features/slices/productsApiSlice';
 import Paginate from "../components/paginate";
 import ProductCarousel from "../components/productCarousel";
+import Meta from "../components/meta";
 
 const HomeScreen = () => {
     const { pageNumber, keyword } = useParams()
@@ -13,6 +14,7 @@ const HomeScreen = () => {
         {!keyword ? (<ProductCarousel />) : <Link className='btn btn-light my-3' to='/'>
             Go Back
         </Link>}
+        <Meta title={"store"} />
         <h1>Latest Products</h1>
         {isLoading ? (<Loader />) : err ?
             (<Message variant={"danger"}>{err?.data?.message || err.error}</Message>) : (

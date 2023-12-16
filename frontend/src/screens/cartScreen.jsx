@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { addToCart, removeFromCart } from '../features/slices/cartSlice';
 import CartCard from '../components/cartCard';
 import CheckOutCard from '../components/checkOutCard';
+import Meta from '../components/meta';
 const CartScreen = () => {
     const { cartItems } = useSelector((state) => state.cart);
     const dispatch = useDispatch()
@@ -20,6 +21,7 @@ const CartScreen = () => {
     }
     return (<>
         <Row>
+            <Meta title={"cart"} />
             <h1 style={{ marginBottom: '20px' }}>Shopping Cart</h1>
             <Col md={8}>
                 {cartItems.length === 0 ? (<Message>

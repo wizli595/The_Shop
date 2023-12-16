@@ -17,7 +17,7 @@ const authSlice = createSlice({
     // eslint-disable-next-line no-unused-vars
     logout: (state, actions) => {
       state.userInfo = null;
-      localStorage.removeItem("userInfo");
+      localStorage.clear();
     },
   },
 });

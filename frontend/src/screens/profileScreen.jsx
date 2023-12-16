@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { Table, Form, Button, Row, Col, } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
@@ -10,6 +10,7 @@ import { useGetMyOrdersQuery } from '../features/slices/orderApiSlice';
 import { setCredentials } from '../features/slices/authSlice';
 import { FaTimes } from 'react-icons/fa';
 import TableHead from '../components/tableHead';
+import Meta from '../components/meta';
 const ProfileScreen = () => {
     const { userInfo } = useSelector(state => (state.auth));
 
@@ -50,6 +51,7 @@ const ProfileScreen = () => {
     return (<>
         <Row>
             <Col md={3}>
+                <Meta title={userInfo.isAdmin ? "Admin DashBoard" : userInfo.name} />
                 <h2>User Profile</h2>
                 <Form onSubmit={submitHandler}>
                     <Form.Group className='my-2' controlId='name'>

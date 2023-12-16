@@ -5,14 +5,7 @@ const notFound = (req, res, next) => {
 };
 const errorHandler = (err, req, res, next) => {
   let statusCode = res.statusCode === 200 ? 500 : res.statusCode;
-  console.log(res.statusCode);
   let message = err.message;
-
-  if (err.name === "CastError" && err.kind === "ObjectId") {
-    message = "Resourse not found";
-    statusCode = 404;
-  }
-
   res.status(statusCode).json({
     message: message,
     stack: err.stack,

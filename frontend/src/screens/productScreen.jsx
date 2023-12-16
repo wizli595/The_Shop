@@ -8,6 +8,7 @@ import { toast } from 'react-toastify';
 import { useDispatch, useSelector } from 'react-redux';
 import { addToCart } from '../features/slices/cartSlice';
 import { useState } from 'react';
+import Meta from '../components/meta';
 
 const ProductScreen = () => {
 
@@ -61,6 +62,7 @@ const ProductScreen = () => {
             (<Loader />) : err ?
                 (<Message variant={"danger"}>{err?.data?.message || err.error}</Message>) : (<>
                     <Row>
+                        <Meta title={SingleProd.name} />
                         <Col md={5}>
                             <Image src={SingleProd.image} alt={SingleProd.name} fluid />
                         </Col>
