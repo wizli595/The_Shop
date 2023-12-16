@@ -34,7 +34,9 @@ ReactDOM.createRoot(document.getElementById('root')).render(
           <Routes>
             <Route exact path='/' element={<App />}>
               <Route exact path='/' element={<HomeScreen />} />
+              <Route exact path='/search/:keyword' element={<HomeScreen />} />
               <Route exact path='/page/:pageNumber' element={<HomeScreen />} />
+              <Route exact path='/search/:keyword/page/:pageNumber' element={<HomeScreen />} />
               <Route exact path='/product/:id' element={<ProductScreen />} />
               <Route exact path='/cart' element={<CartScreen />} />
               <Route exact path='/login' element={<LoginScreen />} />

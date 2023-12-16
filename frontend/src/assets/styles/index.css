@@ -1,6 +1,11 @@
 main {
   min-height: 80vh;
 }
+@media (min-width: 992px) {
+  nav {
+    height: 70px;
+  }
+}
 .shop-logo {
   width: 50px;
 }
