@@ -7,6 +7,7 @@ import { PayPalButtons, usePayPalScriptReducer } from '@paypal/react-paypal-js';
 import { useGetOrderDetailsQuery, useGetPayPalClientIdQuery, usePayOrderMutation, useDeliverOrderMutation } from "../features/slices/orderApiSlice";
 import { useSelector } from "react-redux";
 import { useEffect } from "react";
+import WhatsappBtn from "../components/whatsappBtn";
 
 const OrderScreen = () => {
     const { id: orderId } = useParams();
@@ -66,7 +67,16 @@ const OrderScreen = () => {
     //     toast.success("Order is Paid")
     // }
     // ///////////
-
+    const payHandler = async () => {
+        const details = userInfo
+        try {
+            await payOrder({ orderId, details });
+            refetch();
+            toast.success("Order is Paid");
+        } catch (err) {
+            toast.error(err?.data?.message || err.error);
+        }
+    }
     const onError = (err) => {
         toast.error(err.message);
     };
@@ -191,32 +201,54 @@ const OrderScreen = () => {
                                             <Col>${order.totalPrice}</Col>
                                         </Row>
                                     </ListGroup.Item>
-                                    {
-                                        !order.isPaid && (
-                                            <ListGroup.Item>
-                                                {loadingPay && <Loader />}
-                                                {isPending ? (<Loader />) : (
-                                                    <div>
-                                                        {/* TEST ONLY */}
-                                                        {/* <Button
+                                    {!userInfo.isAdmin ?
+                                        !order.isPaid &&
+                                            order.paymentMethod === "whatsapp"
+                                            ? (
+                                                <WhatsappBtn />
+                                            ) :
+                                            (
+                                                <ListGroup.Item>
+                                                    {loadingPay && <Loader />}
+                                                    {isPending ? (<Loader />) : (
+                                                        <div>
+                                                            {/* TEST ONLY */}
+                                                            {/* <Button
                                                             style={{ marginBottom: '10px' }}
                                                             onClick={onApproveTest}
                                                         >
                                                             Test Pay Order
                                                         </Button> */}
 
-                                                        <div>
-                                                            <PayPalButtons
-                                                                createOrder={createOrder}
-                                                                onApprove={onApprove}
-                                                                onError={onError}
-                                                            ></PayPalButtons>
+                                                            <div>
+                                                                <PayPalButtons
+                                                                    createOrder={createOrder}
+                                                                    onApprove={onApprove}
+                                                                    onError={onError}
+                                                                ></PayPalButtons>
+                                                            </div>
                                                         </div>
-                                                    </div>
-                                                )}
+                                                    )}
+                                                </ListGroup.Item>
+                                            ) : ""
+                                    }
+                                    {loadingPay && <Loader />}
+                                    {
+                                        userInfo && userInfo.isAdmin && order.paymentMethod === "whatsapp"
+                                        && !order.isDelivered && !order.isPaid &&
+                                        (
+                                            <ListGroup.Item>
+                                                <Button
+                                                    type="button"
+                                                    className="btn btn-block"
+                                                    onClick={payHandler}
+                                                >
+                                                    Mark As Pay
+                                                </Button>
                                             </ListGroup.Item>
                                         )
                                     }
+
                                     {loadingDeliver && <Loader />}
                                     {
                                         userInfo && userInfo.isAdmin && order.isPaid

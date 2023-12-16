@@ -81,10 +81,10 @@ const updateOrderToPaid = asyncHandler(async (req, res) => {
       isPaid: true,
       paidAt: Date.now(),
       paymentResult: {
-        id: req.body.id,
-        status: req.body.status,
-        update_time: req.body.update_time,
-        email_address: req.body.payer.email_address,
+        id: req.body.id || req.user._id,
+        status: req.body?.status || "",
+        update_time: req.body?.update_time || Date.now(),
+        email_address: req.body?.payer?.email_address || req.user.email,
       },
     },
     { new: true }

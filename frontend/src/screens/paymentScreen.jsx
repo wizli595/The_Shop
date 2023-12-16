@@ -45,6 +45,16 @@ const PaymentScreen = () => {
                             onChange={e => setPaymentMethod(e.target.value)}
                         >
                         </Form.Check>
+                        <Form.Check
+                            className="my-2"
+                            type="radio"
+                            label="Whatsapp"
+                            id="Whatsapp"
+                            name="paymentMethod"
+                            value="whatsapp"
+                            onChange={e => setPaymentMethod(e.target.value)}
+                        >
+                        </Form.Check>
                     </Col>
                 </Form.Group>
                 <Button type="submit" variant="primary" className="my-2">
