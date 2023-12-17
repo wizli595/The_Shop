@@ -26,6 +26,7 @@ import ProductListScreen from './screens/admin/productListScreen.jsx';
 import ProductEditScreen from './screens/admin/productEditScreen.jsx';
 import UserListScreen from './screens/admin/userListScreen.jsx';
 import UserEditScreen from './screens/admin/userEditScreen.jsx';
+import NotFoundScreen from './screens/notFoundScreen.jsx';
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
     <HelmetProvider>
@@ -35,6 +36,7 @@ ReactDOM.createRoot(document.getElementById('root')).render(
             <Routes>
               <Route exact path='/' element={<App />}>
                 <Route exact path='/' element={<HomeScreen />} />
+
                 <Route exact path='/search/:keyword' element={<HomeScreen />} />
                 <Route exact path='/page/:pageNumber' element={<HomeScreen />} />
                 <Route exact path='/search/:keyword/page/:pageNumber' element={<HomeScreen />} />
@@ -58,6 +60,7 @@ ReactDOM.createRoot(document.getElementById('root')).render(
                   <Route exact path='/admin/user/:id/edit' element={<UserEditScreen />} />
 
                 </Route>
+                <Route exact path='*' element={<NotFoundScreen />} />
               </Route>
             </Routes>
           </Router>
