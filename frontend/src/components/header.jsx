@@ -1,4 +1,4 @@
-import logo from '@/assets/lgoo.png';
+import logo from '@/assets/logo.svg';
 import { Badge, Navbar, Nav, Container, NavDropdown } from 'react-bootstrap';
 import { FaShoppingCart, FaUser } from 'react-icons/fa';
 import { useDispatch, useSelector } from 'react-redux';
@@ -20,7 +20,7 @@ const Header = () => {
         try {
             await logoutApiCall().unwrap();
             dispatch(logout());
-            dispatch(resetCart())
+            dispatch(resetCart());
             navigate("/login");
         } catch (err) {
             console.log(err);
@@ -32,7 +32,7 @@ const Header = () => {
                 <Container>
                     <Navbar.Brand as={Link} to={'/'}>
                         <img src={logo} alt="The-shop" className='shop-logo' />
-                        The Shop
+
                     </Navbar.Brand>
                     <Navbar.Toggle aria-controls='basic-nav' />
                     <Navbar.Collapse id='basic-nav'>

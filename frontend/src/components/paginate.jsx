@@ -1,14 +1,20 @@
 import { Pagination } from 'react-bootstrap';
 import PropTypes from 'prop-types';
 import { useNavigate } from 'react-router-dom';
+import { useEffect } from 'react';
 
 const Paginate = ({ pages, page, isAdmin = false, keyword = "" }) => {
 
     const navigate = useNavigate();
 
     const handlePages = (p) => {
-        !isAdmin ? keyword ? navigate(`/search/${keyword}/page/${p + 1}`) : navigate(`/page/${p + 1}`) : navigate(`/admin/productlist/${p + 1}`)
-    }
+        !isAdmin ? keyword ? navigate(`/search/${keyword}/page/${p + 1}`) : navigate(`/page/${p + 1}`) : navigate(`/admin/productlist/${p + 1}`);
+    };
+    useEffect(() => {
+        if (page > pages) {
+            navigate("/");
+        }
+    }, [page, pages, navigate]);
 
     return (
         pages > 1 && (

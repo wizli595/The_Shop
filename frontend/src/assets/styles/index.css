@@ -7,7 +7,8 @@ main {
   }
 }
 .shop-logo {
-  width: 50px;
+  width: 40px;
+  /* margin: 2px; */
 }
 .bg-dark {
   background: silver !important;
