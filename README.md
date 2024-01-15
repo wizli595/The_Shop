@@ -14,8 +14,8 @@ This comprehensive MERN (MongoDB, Express.js, React.js, Node.js) e-commerce appl
 - Full featured shopping cart
 - Product reviews and ratings
 - Top products carousel
-- Product pagination (in progress 🔥)
-- Product search feature (in progress 🔥)
+- Product pagination 
+- Product search feature 
 - User profile with orders 
 - Admin product management 
 - Admin user management 
@@ -23,6 +23,10 @@ This comprehensive MERN (MongoDB, Express.js, React.js, Node.js) e-commerce appl
 - Mark orders as delivered option 
 - Checkout process (shipping, payment method, etc) 
 - PayPal / credit card integration 
+- Whatsapp connect 
+- localization france/arabic
+- email contact (soon  🔥)
+- filter by category (soon  🔥)
 - Database seeder (products & users) 
 
 ## Usage
