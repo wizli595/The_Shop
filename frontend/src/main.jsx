@@ -1,5 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
+import i18n from './utils/i18n.js';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import App from './App.jsx';
 import HomeScreen from './screens/homeScreen.jsx';
@@ -36,7 +37,6 @@ ReactDOM.createRoot(document.getElementById('root')).render(
             <Routes>
               <Route exact path='/' element={<App />}>
                 <Route exact path='/' element={<HomeScreen />} />
-
                 <Route exact path='/search/:keyword' element={<HomeScreen />} />
                 <Route exact path='/page/:pageNumber' element={<HomeScreen />} />
                 <Route exact path='/search/:keyword/page/:pageNumber' element={<HomeScreen />} />

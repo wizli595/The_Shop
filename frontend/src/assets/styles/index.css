@@ -66,3 +66,6 @@ table th {
   object-fit: fill;
   /* width: 100%; */
 }
+.color {
+  background-color: rgba(209, 202, 192, 255);
+}
