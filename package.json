@@ -35,10 +35,9 @@
     "yargs": "^17.7.2",
     "yargs-parser": "^21.1.1",
     "youcan-payment-nodejs-sdk": "^1.2.8",
-    "vite-plugin-eslint": "^1.8.1"
-  },
-  "devDependencies": {
+    "vite-plugin-eslint": "^1.8.1",
     "concurrently": "^8.2.2",
     "nodemon": "^3.0.1"
-  }
+  },
+  "devDependencies": {}
 }
