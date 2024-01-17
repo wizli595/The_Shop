@@ -12,6 +12,7 @@
     "seeder": "node backend/seeder.js ",
     "data:destroy": "node backend/seeder.js -d ",
     "list": "node backend/listRoutes.js",
+    "build": "npm install && npm install --prefix frontend && npm run build --prefix frontend",
     "make": "node backend/maker.js"
   },
   "author": "Wizli Abdessalam",

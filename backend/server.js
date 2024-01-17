@@ -31,13 +31,6 @@ app.use(
   })
 );
 
-// @desc Test the api endpoint
-// @route GET /
-// @access Public
-app.get("/", (req, res) => {
-  res.send("API is running...");
-});
-
 // All Routes
 app.use("/api/products", productRoute);
 app.use("/api/users", userRoute);
@@ -51,9 +44,25 @@ app.get("/api/config/paypal", (req, res) => {
   });
 });
 
-// Set __dirname to current directory
-const __dirname = path.resolve();
-app.use("/uploads", express.static(path.join(__dirname, "/uploads")));
+if (process.env.NODE_ENV === "production") {
+  const __dirname = path.resolve();
+
+  app.use("/uploads", express.static("/var/data/uploads"));
+
+  app.use(express.static(path.join(__dirname, "/frontend/dist")));
+
+  app.get("*", (req, res) =>
+    res.sendFile(path.resolve(__dirname, "frontend", "dist", "index.html"))
+  );
+} else {
+  const __dirname = path.resolve();
+
+  app.use("/uploads", express.static(path.join(__dirname, "/uploads")));
+
+  app.get("/", (req, res) => {
+    res.send("API is running....");
+  });
+}
 
 // If no route work or the above throw an error
 app.use(notFound);
