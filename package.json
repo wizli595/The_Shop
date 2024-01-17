@@ -5,14 +5,14 @@
   "type": "module",
   "main": "server.js",
   "scripts": {
-    "start": "node backend/server",
+    "start": "vite",
     "server": "nodemon -r dotenv/config backend/server.js ",
-    "client": "npm run dev --prefix frontend",
+    "client": "npm start --prefix frontend",
     "serve": "concurrently \" npm run server \" \"npm run client \"",
     "seeder": "node backend/seeder.js ",
     "data:destroy": "node backend/seeder.js -d ",
     "list": "node backend/listRoutes.js",
-    "build": "npm install && vite build && npm install --prefix frontend && npm run build --prefix frontend",
+    "build": "npm install && npm install --prefix frontend && npm run build --prefix frontend",
     "make": "node backend/maker.js"
   },
   "author": "Wizli Abdessalam",
