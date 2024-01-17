@@ -11,7 +11,7 @@ node_modules
 dist
 dist-ssr
 *.local
-bootsrap.costom.css
+
 # Editor directories and files
 .env
 .vscode/*
@@ -23,4 +23,4 @@ bootsrap.costom.css
 *.njsproj
 *.sln
 *.sw?
-frontend/src/assets/styles/bootstrap.costom.css
+
