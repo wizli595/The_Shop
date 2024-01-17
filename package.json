@@ -12,7 +12,7 @@
     "seeder": "node backend/seeder.js ",
     "data:destroy": "node backend/seeder.js -d ",
     "list": "node backend/listRoutes.js",
-    "build": "vite build --base /frontend",
+    "build": "npm install && npm install --prefix frontend && npm run build --prefix frontend",
     "make": "node backend/maker.js"
   },
   "author": "Wizli Abdessalam",
@@ -34,11 +34,11 @@
     "vite": "^5.0.11",
     "yargs": "^17.7.2",
     "yargs-parser": "^21.1.1",
-    "youcan-payment-nodejs-sdk": "^1.2.8"
+    "youcan-payment-nodejs-sdk": "^1.2.8",
+    "vite-plugin-eslint": "^1.8.1"
   },
   "devDependencies": {
     "concurrently": "^8.2.2",
-    "nodemon": "^3.0.1",
-    "vite-plugin-eslint": "^1.8.1"
+    "nodemon": "^3.0.1"
   }
 }
