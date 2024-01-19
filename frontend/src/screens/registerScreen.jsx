@@ -2,8 +2,8 @@ import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { Form, Button, Row, Col } from 'react-bootstrap';
 import FormContainer from '../components/formContainer';
 import { useState, useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { setCredentials } from '../features/slices/authSlice';
+import { useSelector } from 'react-redux';
+// import { setCredentials } from '../features/slices/authSlice';
 import { useRegisterMutation } from '../features/slices/usersApiSlice';
 import Loader from '../components/Loader';
 import { toast } from 'react-toastify';
@@ -18,7 +18,7 @@ const RegisterScreen = () => {
     const { userInfo } = useSelector((state) => state.auth)
 
     const [register, { isLoading }] = useRegisterMutation()
-    const dispatch = useDispatch();
+    // const dispatch = useDispatch();
     const navigate = useNavigate()
 
     const { search } = useLocation()
@@ -46,8 +46,12 @@ const RegisterScreen = () => {
         } else {
             try {
                 const res = await register({ name, email, password }).unwrap();
-                dispatch(setCredentials({ ...res }));
-                navigate("/");
+                console.log(res)
+                toast.success('User registered successfully. Please check your email for verification.');
+                // Redirect to the email verification screen
+                navigate(`/login`);
+                // dispatch(setCredentials({ ...res }));
+                // navigate("/");
             } catch (err) {
                 console.log(err)
                 toast.error(err?.data?.message || err.error);

@@ -1,5 +1,6 @@
 import mongoose from "mongoose";
 import bcrypt from "bcryptjs";
+import generateRandomToken from "../utils/generateRandomToken.js";
 const userSchema = mongoose.Schema(
   {
     name: {
@@ -19,6 +20,13 @@ const userSchema = mongoose.Schema(
       type: mongoose.SchemaTypes.Boolean,
       required: true,
       default: false,
+    },
+    isVerified: {
+      type: mongoose.SchemaTypes.Boolean,
+      default: false,
+    },
+    verificationToken: {
+      type: mongoose.SchemaTypes.String,
     },
   },
   {
@@ -45,6 +53,10 @@ userSchema.pre("save", async function (next) {
 
   const salt = await bcrypt.genSalt(10);
   this.password = await bcrypt.hash(this.password, salt);
+
+  this.verificationToken = generateRandomToken();
+
+  next();
 });
 userSchema.pre("findOneAndUpdate", async function (next) {
   if (this._update.password) {

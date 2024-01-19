@@ -1,6 +1,7 @@
 import asyncHandler from "../middelware/asyncHandler.js";
 import User from "../models/UserModel.js";
 import generateToken from "../utils/generateToken.js";
+import { sendVerificationEmail } from "../utils/sendVerificationEmail.js";
 
 // @desc Auth user & get token
 // @route POST /api/users/login
@@ -12,10 +13,13 @@ const authUser = asyncHandler(async (req, res) => {
     res.status(401);
     throw new Error("Invalide email or password");
   }
-  generateToken(res, usr._id);
-
-  // if (!usr.isAdmin)
-  return res.status(201).json(usr.toJSON());
+  if (usr.isVerified) {
+    generateToken(res, usr._id);
+    return res.status(201).json(usr.toJSON());
+  } else {
+    res.status(401);
+    throw new Error("Email not verified");
+  }
 });
 
 // @desc Register a new user
@@ -23,23 +27,34 @@ const authUser = asyncHandler(async (req, res) => {
 // @access Public
 const registerUser = asyncHandler(async (req, res) => {
   const { name, email, password } = req.body;
+
   const userExists = await User.findOne({ email });
+
   if (userExists) {
     res.status(400);
     throw new Error("User already exists");
   }
+
   const user = await User.create({
     name,
     email,
     password,
   });
-  if (!user) {
+
+  if (user) {
+    sendVerificationEmail(user.email, user.verificationToken);
+
+    // Commenting out
+    // generateToken(res, user._id);
+    res.status(201).json({
+      message:
+        "User registered successfully. Please check your email for verification.",
+      verificationToken: user.verificationToken,
+    });
+  } else {
     res.status(400);
     throw new Error("Invalid user data");
   }
-  generateToken(res, user._id);
-  // if(!user.isAdmin) return res.status(201).json({name:user.name,email:})
-  res.status(201).json(user.toJSON());
 });
 
 // @desc Logout user / clear cookie
@@ -142,6 +157,38 @@ const updateUser = asyncHandler(async (req, res) => {
   res.status(200).json(user);
 });
 
+// @desc Verify user email
+// @route GET /api/users/verify/:token
+// @access Public
+const verifyEmail = asyncHandler(async (req, res) => {
+  const { token } = req.params;
+
+  console.log("Verification Token:", token);
+
+  const user = await User.findOne({ verificationToken: token });
+  if (!user) {
+    console.error("Invalid verification token");
+    res.status(400).json({ error: "Invalid verification token" });
+    return;
+  }
+
+  user.isVerified = true;
+  user.verificationToken = undefined;
+
+  generateToken(res, user._id);
+
+  try {
+    await user.save();
+    console.log("Email verification successful for user:", user._id);
+    res
+      .status(200)
+      .json({ message: "Email verification successful " + user.name });
+  } catch (error) {
+    console.error("Error saving user after email verification:", error.message);
+    res.status(500).json({ error: "Internal server error" });
+  }
+});
+
 export {
   authUser,
   registerUser,
@@ -151,5 +198,6 @@ export {
   deleteUser,
   getUserByID,
   updateUser,
+  verifyEmail,
   logoutUser,
 };

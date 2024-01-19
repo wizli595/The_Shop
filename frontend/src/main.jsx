@@ -28,6 +28,7 @@ import ProductEditScreen from './screens/admin/productEditScreen.jsx';
 import UserListScreen from './screens/admin/userListScreen.jsx';
 import UserEditScreen from './screens/admin/userEditScreen.jsx';
 import NotFoundScreen from './screens/notFoundScreen.jsx';
+import EmailVerificationScreen from './screens/emailVerificationScreen.jsx';
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
     <HelmetProvider>
@@ -44,6 +45,7 @@ ReactDOM.createRoot(document.getElementById('root')).render(
                 <Route exact path='/cart' element={<CartScreen />} />
                 <Route exact path='/login' element={<LoginScreen />} />
                 <Route exact path='/register' element={<RegisterScreen />} />
+                <Route path="/verify-email/:token" element={<EmailVerificationScreen />} />
                 <Route exact path='' element={<PrivateRoute />}>
                   <Route exact path='/shipping' element={<ShippingScreen />} />
                   <Route exact path='/payment' element={<PaymentScreen />} />
