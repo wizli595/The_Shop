@@ -61,6 +61,11 @@ export const productsApiSlice = apiSlice.injectEndpoints({
         url: PRODUCTS_URL + "/top",
       }),
     }),
+    getCatgories: builder.query({
+      query: () => ({
+        url: PRODUCTS_URL + "/category",
+      }),
+    }),
   }),
 });
 export const {
@@ -72,4 +77,5 @@ export const {
   useDeleteProductMutation,
   useCreateProductReviewMutation,
   useGetTopProductsQuery,
+  useGetCatgoriesQuery,
 } = productsApiSlice;

@@ -1,13 +1,14 @@
 import { Spinner } from "react-bootstrap";
+import propTypes from 'prop-types';
 
-const Loader = () => {
+const Loader = ({ width = "100px", height = "100px" }) => {
     return (
         <Spinner animation="border"
             role="status"
             style={
                 {
-                    width: "100px",
-                    height: "100px",
+                    width: width,
+                    height: height,
                     margin: "auto",
                     display: "block"
                 }
@@ -15,5 +16,8 @@ const Loader = () => {
         >
         </Spinner>);
 }
-
+Loader.propTypes = {
+    width: propTypes.string,
+    height: propTypes.string
+}
 export default Loader;

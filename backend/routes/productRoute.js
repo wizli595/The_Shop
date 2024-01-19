@@ -7,6 +7,7 @@ import {
   deleteProduct,
   createProductReview,
   getTopProducts,
+  getCategories,
 } from "../controllers/productController.js";
 import { admin, protect } from "../middelware/authMiddleware.js";
 import { checkObjectId } from "../middelware/checkObjectId.js";
@@ -14,6 +15,7 @@ import { checkObjectId } from "../middelware/checkObjectId.js";
 const router = new Router();
 
 router.route("/").get(getProducts).post(protect, admin, createProduct);
+router.route("/category").get(getCategories);
 
 router.route("/:id/reviews").post(protect, checkObjectId, createProductReview);
 

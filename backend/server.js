@@ -6,6 +6,7 @@ import cors from "cors";
 import productRoute from "./routes/productRoute.js";
 import userRoute from "./routes/userRoute.js";
 import orderRoute from "./routes/orderRoute.js";
+import contactRoute from "./routes/contactRoute.js";
 import uploadsRoute from "./routes/uploadRoute.js";
 import { errorHandler, notFound } from "./middelware/errorMiddleware.js";
 import cookieParser from "cookie-parser";
@@ -35,8 +36,8 @@ app.use(
 app.use("/api/products", productRoute);
 app.use("/api/users", userRoute);
 app.use("/api/orders", orderRoute);
+app.use("/api/contact", contactRoute);
 app.use("/api/uploads", uploadsRoute);
-
 // PayPal route
 app.get("/api/config/paypal", (req, res) => {
   res.send({

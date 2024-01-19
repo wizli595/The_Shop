@@ -9,6 +9,7 @@ import { logout } from '../features/slices/authSlice';
 import { resetCart } from '../features/slices/cartSlice';
 import SearchBox from './searchBox';
 import LanguageSwitcher from './LanguageSwitcher';
+import Catgories from './categories';
 const Header = () => {
     const { cartItems } = useSelector((state) => state.cart);
     const { userInfo } = useSelector((state) => state.auth);
@@ -35,12 +36,15 @@ const Header = () => {
                 <Container>
                     <Navbar.Brand as={Link} to={'/'}>
                         <img src={logo} alt="The-shop" className='shop-logo' />
-
                     </Navbar.Brand>
                     <Navbar.Toggle aria-controls='basic-nav' />
                     <Navbar.Collapse id='basic-nav'>
                         <Nav className='ms-auto' >
                             <SearchBox />
+                            <Nav.Link as={Link} to={'/contact'}>
+                                {t('contact')}
+                            </Nav.Link>
+                            <Catgories />
                             <Nav.Link as={Link} to={'/cart'}>
                                 <FaShoppingCart /> {t('cart')}
                                 {cartItems.length > 0 && (<Badge pill style={{ marginLeft: "5px" }}>

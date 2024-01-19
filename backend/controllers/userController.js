@@ -1,7 +1,7 @@
 import asyncHandler from "../middelware/asyncHandler.js";
 import User from "../models/UserModel.js";
 import generateToken from "../utils/generateToken.js";
-import { sendVerificationEmail } from "../utils/sendVerificationEmail.js";
+import { sendVerificationEmail } from "../utils/emailFunctions.js";
 
 // @desc Auth user & get token
 // @route POST /api/users/login
