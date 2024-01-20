@@ -3,12 +3,20 @@ import PropTypes from 'prop-types';
 import { useNavigate } from 'react-router-dom';
 import { useEffect } from 'react';
 
-const Paginate = ({ pages, page, isAdmin = false, keyword = "" }) => {
+const Paginate = ({ pages, page, isAdmin = false, keyword = "", category = "" }) => {
 
     const navigate = useNavigate();
 
     const handlePages = (p) => {
-        !isAdmin ? keyword ? navigate(`/search/${keyword}/page/${p + 1}`) : navigate(`/page/${p + 1}`) : navigate(`/admin/productlist/${p + 1}`);
+        !isAdmin
+            ? navigate(
+                keyword
+                    ? `/search/${keyword}/page/${p + 1}`
+                    : category
+                        ? `/category/${category}/page/${p + 1}`
+                        : `/page/${p + 1}`
+            )
+            : navigate(`/admin/productlist/${p + 1}`);
     };
     useEffect(() => {
         if (page > pages) {
@@ -37,7 +45,8 @@ Paginate.propTypes = {
     pages: PropTypes.number,
     page: PropTypes.number,
     isAdmin: PropTypes.bool,
-    keyword: PropTypes.string
+    keyword: PropTypes.string,
+    category: PropTypes.string,
 };
 
 export default Paginate;

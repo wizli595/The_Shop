@@ -10,7 +10,7 @@ const Catgories = () => {
                 <NavDropdown.Item
                     key={category}
                     as={Link}
-                    to={`/category/${category.id}`}
+                    to={`/category/${category}`}
                 >
                     {category}
                 </NavDropdown.Item>

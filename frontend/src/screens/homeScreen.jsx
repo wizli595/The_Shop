@@ -8,10 +8,11 @@ import ProductCarousel from "../components/productCarousel";
 import Meta from "../components/meta";
 
 const HomeScreen = () => {
-    const { pageNumber, keyword } = useParams()
-    const { data, isLoading, err } = useGetProductsQuery({ keyword, pageNumber });
+    const { pageNumber, keyword, category } = useParams()
+
+    const { data, isLoading, err } = useGetProductsQuery({ keyword, pageNumber, category });
     return (<>
-        {!keyword ? (<ProductCarousel />) : <Link className='btn btn-light my-3' to='/'>
+        {!keyword && !category ? (<ProductCarousel />) : <Link className='btn btn-light my-3' to='/'>
             Go Back
         </Link>}
         <Meta title={"store"} />
@@ -21,7 +22,7 @@ const HomeScreen = () => {
                 <>
                     <ProductList products={data.products} />
                     <div className="d-flex justify-content-center align-items-center">
-                        <Paginate page={data.page} pages={data.pages} keyword={keyword ? keyword : ""} />
+                        <Paginate page={data.page} pages={data.pages} keyword={keyword} category={category} />
                     </div>
                 </>
             )

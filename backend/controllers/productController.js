@@ -7,23 +7,27 @@ import Product from "../models/productModel.js";
 const getProducts = asyncHandler(async (req, res) => {
   const pageSize = 4;
 
-  const { pageNumber } = req.query;
+  const { pageNumber, keyword, category } = req.query;
 
   const page = Number(pageNumber) || 1;
 
-  const keyword = req.query.keyword
-    ? { name: { $regex: req.query.keyword, $options: "i" } }
-    : {};
+  // Build the filter object
+  const filter = {};
+  if (keyword) {
+    filter.name = { $regex: keyword, $options: "i" };
+  }
+  if (category) {
+    filter.category = category;
+  }
 
-  const count = await Product.countDocuments({ ...keyword });
+  const count = await Product.countDocuments(filter);
 
-  const products = await Product.find({ ...keyword })
+  const products = await Product.find(filter)
     .limit(pageSize)
     .skip(pageSize * (page - 1));
 
   return res.send({ products, page, pages: Math.ceil(count / pageSize) });
 });
-
 // @desc Get all categories
 // @route GET /api/products/categories
 // @access Public
