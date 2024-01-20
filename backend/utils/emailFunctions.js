@@ -7,12 +7,12 @@ const sendVerificationEmail = (email, verificationToken) => {
     port: 587,
     auth: {
       user: "abdoowizli@gmail.com",
-      pass: "yqw8pI2x9nQNUmTJ",
+      pass: process.env.EMAIL_PASS,
     },
   });
 
   const mailOptions = {
-    from: "abdoowizli@gmail.com",
+    from: "Jawharatlghzal23@gmail.com",
     to: email,
     subject: "Account Verification",
     text: `Click the following link to verify your email: https://jawhara.onrender.com/api/users/verify/${verificationToken}`,
@@ -33,13 +33,13 @@ const sendContactEmail = (name, email, message) => {
     port: 587,
     auth: {
       user: "abdoowizli@gmail.com",
-      pass: "yqw8pI2x9nQNUmTJ",
+      pass: process.env.EMAIL_PASS,
     },
   });
 
   const mailOptions = {
     from: email,
-    to: "abdoowizli@gmail.com", // Set the email where you want to receive contact form submissions
+    to: "Jawharatlghzal23@gmail.com", // Set the email where you want to receive contact form submissions
     subject: "New Contact Form Submission",
     text: `
       Name: ${name}\n
