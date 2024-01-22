@@ -27,7 +27,7 @@ app.use(cookieParser());
 // Cors middelware
 app.use(
   cors({
-    origin: "http://localhost:5173", // React app's url
+    origin: "https://jawhara.onrender.com", // React app's url
     credentials: true, // Allow cookies to be sent with requests from the client
   })
 );
