@@ -10,9 +10,13 @@ import {
   getUserByID,
   verifyEmail,
   logoutUser,
+  authFacebookUser,
 } from "../controllers/userController.js";
 import { admin, protect } from "../middelware/authMiddleware.js";
-// import cmi from "cmi-payment-nodejs";
+import passport from "passport";
+import { configureFacebookAuth } from "../middelware/facebookAuth.js";
+
+configureFacebookAuth();
 const router = new Router();
 const protectMiddleware = protect;
 const adminMiddleware = admin;
@@ -24,6 +28,7 @@ router
 
 // login route (email,password)
 router.post("/auth", authUser);
+router.post("/auth/facebook", authFacebookUser);
 
 // logout destroy token && coockie
 router.post("/logout", logoutUser);

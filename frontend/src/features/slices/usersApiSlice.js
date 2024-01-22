@@ -57,6 +57,13 @@ export const userApiSlice = apiSlice.injectEndpoints({
       }),
       invalidatesTags: ["User"],
     }),
+    loginWithFacebook: builder.mutation({
+      query: (data) => ({
+        url: `${USERS_URL}/auth/facebook`,
+        method: "POST",
+        body: data,
+      }),
+    }),
   }),
 });
 
@@ -69,4 +76,5 @@ export const {
   useDeleteUserMutation,
   useGetUserDetailsQuery,
   useUpdateUserMutation,
+  useLoginWithFacebookMutation,
 } = userApiSlice;

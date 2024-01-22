@@ -2,6 +2,7 @@ import asyncHandler from "../middelware/asyncHandler.js";
 import User from "../models/UserModel.js";
 import generateToken from "../utils/generateToken.js";
 import { sendVerificationEmail } from "../utils/emailFunctions.js";
+import passport from "passport";
 
 // @desc Auth user & get token
 // @route POST /api/users/login
@@ -189,6 +190,13 @@ const verifyEmail = asyncHandler(async (req, res) => {
   }
 });
 
+// @desc Auth user using Facebook & get token
+// @route POST /api/users/auth/facebook
+// @access Public
+const authFacebookUser = passport.authenticate("facebook", {
+  scope: ["email"],
+});
+
 export {
   authUser,
   registerUser,
@@ -200,4 +208,5 @@ export {
   updateUser,
   verifyEmail,
   logoutUser,
+  authFacebookUser,
 };
