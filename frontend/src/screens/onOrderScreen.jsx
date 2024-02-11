@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { Form, Button } from 'react-bootstrap';
-import { useNavigate, useParams } from 'react-router-dom'; // Import useParams
+import { useNavigate, useParams } from 'react-router-dom';
 import { toast } from 'react-toastify';
-import FormContainer from '../components/FormContainer';
+import FormContainer from '../components/formContainer';
 import { useCreateOrderMutation } from "../features/slices/orderApiSlice";
 import { useGetProductDetailsQuery } from '../features/slices/productsApiSlice';
 const OnOrderScreen = () => {
