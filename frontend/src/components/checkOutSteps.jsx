@@ -1,9 +1,18 @@
 import { Nav } from 'react-bootstrap';
 import propTypes from 'prop-types';
 import { Link } from 'react-router-dom';
-const steps = ['LogIn', 'Shipping', 'Payment', 'PlaceOrder'];
 
-const CheckoutSteps = ({ currentStep }) => {
+const CheckoutSteps = ({ currentStep, includeOnOrder = false }) => {
+
+    let steps = ['LogIn', 'Shipping', 'Payment'];
+
+
+    if (includeOnOrder) {
+        steps.push('OnOrder');
+    } else {
+        steps.push('PlaceOrder');
+    }
+
     return (
         <Nav className='justify-content-center mb-4'>
             {steps.map((step, index) => (
@@ -20,7 +29,10 @@ const CheckoutSteps = ({ currentStep }) => {
         </Nav>
     );
 };
+
 CheckoutSteps.propTypes = {
-    currentStep: propTypes.number
-}
+    currentStep: propTypes.number.isRequired,
+    includeOnOrder: propTypes.bool,
+};
+
 export default CheckoutSteps;

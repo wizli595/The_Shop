@@ -29,6 +29,7 @@ const OrderScreen = () => {
     const { userInfo } = useSelector(state => state.auth);
 
     useEffect(() => {
+        console.log(order.orderItems.details)
         if (!errorPaypal && !loadingPayPal && paypal.clientId) {
             const loadPaypalScript = async () => {
                 paypalDispatch({
@@ -96,7 +97,7 @@ const OrderScreen = () => {
         }
     };
     return isLoading ? (<Loader />) :
-        error ? (<Message variant={"danger"}>{error.data.message}</Message>) :
+        error ? (<Message variant={"danger"}>{error?.data?.message}</Message>) :
             (
                 <>
                     <h1>Order {orderId}</h1>
@@ -117,6 +118,10 @@ const OrderScreen = () => {
                                         <strong>Address: </strong>
                                         {order.shippingAddress.address + " " + order.shippingAddress.city + " " + order.shippingAddress.country}
                                     </p>
+                                    {order.orderItems.details && <p>
+                                        <strong>detailes </strong>
+                                        {order.orderItems.details}
+                                    </p>}
                                     {
                                         order.isDelivered ?
                                             (<Message variant={"success"}>Delivered on {order.deliveredAt.substring(0, 10)}</Message>)

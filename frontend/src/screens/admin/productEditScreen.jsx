@@ -22,8 +22,10 @@ const ProductEditScreen = () => {
         image: "",
         brand: "",
         category: "",
-        countInStock: 0
+        countInStock: 0,
+        onOrder: false
     });
+    const [onOrder, setOnOrder] = useState(false);
 
     const [updateProduct, { isLoading: loadingUpdate }] = useUpdateProductMutation();
 
@@ -40,8 +42,10 @@ const ProductEditScreen = () => {
 
     const submitHandler = async (e) => {
         e.preventDefault();
+        const newProd = { ...prodInfo, onOrder };
+
         try {
-            await updateProduct({ productId, ...prodInfo }).unwrap();
+            await updateProduct({ productId, ...newProd }).unwrap();
             toast.success("Product updated");
             refetch();
             navigate("/admin/productlist");
@@ -49,6 +53,7 @@ const ProductEditScreen = () => {
             toast.error(err?.data?.message || err.error);
         }
     };
+
 
     const uploadHandler = async (e) => {
         const { files } = e.target;
@@ -66,9 +71,11 @@ const ProductEditScreen = () => {
 
 
     useEffect(() => {
-        if (product) setProdInfo(prv => ({ ...prv, ...product }));
+        if (product) {
+            setProdInfo(prv => ({ ...prv, ...product }));
+            setOnOrder(product.onOrder || false);
+        }
     }, [product]);
-
     return (
         <>
             <Link to={"/admin/productlist"} className='btn btn-light my-3'>
@@ -160,6 +167,14 @@ const ProductEditScreen = () => {
                                             name='countInStock'
                                             value={prodInfo.countInStock}
                                             onChange={changeHandler}
+                                        />
+                                    </Form.Group>
+                                    <Form.Group controlId='onOrder' className='my-2'>
+                                        <Form.Check
+                                            type="checkbox"
+                                            label="On Order"
+                                            checked={onOrder}
+                                            onChange={(e) => setOnOrder(e.target.checked)}
                                         />
                                     </Form.Group>
                                     <Button type='submit' variant='primary' className='my-2'>Update</Button>

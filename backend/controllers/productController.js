@@ -72,8 +72,16 @@ const createProduct = asyncHandler(async (req, res) => {
 // @access Private/Admin
 const updateProduct = asyncHandler(async (req, res) => {
   const { id } = req.params;
-  const { name, price, description, image, brand, category, countInStock } =
-    req.body;
+  const {
+    name,
+    price,
+    description,
+    image,
+    brand,
+    category,
+    countInStock,
+    onOrder,
+  } = req.body;
 
   const product = await Product.findByIdAndUpdate(
     id,
@@ -85,6 +93,7 @@ const updateProduct = asyncHandler(async (req, res) => {
       brand,
       category,
       countInStock,
+      onOrder,
     },
     { new: true }
   );

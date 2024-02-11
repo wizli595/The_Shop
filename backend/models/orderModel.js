@@ -18,6 +18,7 @@ const orderSchema = mongoose.Schema(
           required: true,
           ref: "Product",
         },
+        details: { type: mongoose.SchemaTypes.String, required: false },
       },
     ],
     shippingAddress: {

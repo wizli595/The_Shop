@@ -99,7 +99,9 @@ const ProductListScreen = () => {
                         </tbody>
                     </Table>
                     <div className='d-flex justify-content-center align-items-center'>
-                        <Paginate page={data.page} pages={data.pages} isAdmin={true} />
+                        {data && data.products.length > 0 && (
+                            <Paginate page={data.page} pages={data.pages} isAdmin={true} />
+                        )}
                     </div>
                 </>)
         }

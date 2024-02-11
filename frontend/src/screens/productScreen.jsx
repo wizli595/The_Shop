@@ -91,9 +91,16 @@ const ProductScreen = () => {
                                     <ListGroup.Item>
                                         <Row>
                                             <Col>Status:</Col>
-                                            {SingleProd.countInStock > 0 ?
-                                                <Col className='text-success'>In Stock</Col> :
-                                                <Col className='text-danger'>Out Of Stock</Col>}
+                                            {SingleProd.countInStock > 0 ? (
+                                                <Col className='text-success'>In Stock</Col>
+                                            ) : SingleProd.onOrder ? (
+                                                <Col className='text-warning'>
+                                                    On Order -
+                                                    <Link to={"/onorder/" + productID}>View </Link>
+                                                </Col>
+                                            ) : (
+                                                <Col className='text-danger'>Out Of Stock</Col>
+                                            )}
                                         </Row>
                                     </ListGroup.Item>
                                     {SingleProd.countInStock > 0 &&

@@ -29,6 +29,7 @@ import UserListScreen from './screens/admin/userListScreen.jsx';
 import UserEditScreen from './screens/admin/userEditScreen.jsx';
 import NotFoundScreen from './screens/notFoundScreen.jsx';
 import ContactUsScreen from './screens/ContactUsScreen.jsx';
+import OnOrderScreen from './screens/onOrderScreen.jsx';
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
@@ -55,6 +56,8 @@ ReactDOM.createRoot(document.getElementById('root')).render(
                   <Route exact path='/placeorder' element={<PlaceOrderScreen />} />
                   <Route exact path='/order/:id' element={<OrderScreen />} />
                   <Route exact path='/profile' element={<ProfileScreen />} />
+                  <Route exact path='/onorder/:id' element={<OnOrderScreen />} />
+
                 </Route>
                 <Route exact path='' element={<AdminRoute />}>
                   <Route exact path='/admin/orderlist' element={<OrderListScreen />} />
