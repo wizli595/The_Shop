@@ -2,10 +2,14 @@ import { NavDropdown } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import { useGetCatgoriesQuery } from '../features/slices/productsApiSlice';
 import Loader from './Loader';
+import { useTranslation } from 'react-i18next';
 const Catgories = () => {
-    const { data: categories, isLoading, error } = useGetCatgoriesQuery()
+    const { data: categories, isLoading, error } = useGetCatgoriesQuery();
+
+    const { t } = useTranslation();
+
     return (<>
-        {isLoading ? <Loader width='50px' height='50px' /> : error ? "" : <NavDropdown title="Categories" id="categories-dropdown">
+        {isLoading ? <Loader width='50px' height='50px' /> : error ? "" : <NavDropdown title={t("Categories")} id="categories-dropdown">
             {categories.map((category) => (
                 <NavDropdown.Item
                     key={category}
@@ -18,6 +22,6 @@ const Catgories = () => {
         </NavDropdown>}
 
     </>);
-}
+};
 
 export default Catgories;

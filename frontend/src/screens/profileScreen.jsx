@@ -11,6 +11,8 @@ import { setCredentials } from '../features/slices/authSlice';
 import { FaTimes } from 'react-icons/fa';
 import TableHead from '../components/tableHead';
 import Meta from '../components/meta';
+import { useTranslation } from 'react-i18next';
+
 const ProfileScreen = () => {
     const { userInfo } = useSelector(state => (state.auth));
 
@@ -20,6 +22,9 @@ const ProfileScreen = () => {
         password: "",
         confirmPassword: ""
     });
+
+    const { t } = useTranslation();
+
     const changeHandler = (e) => {
         const { name, value } = e.target;
         setInfo(prv => {
@@ -51,61 +56,61 @@ const ProfileScreen = () => {
     return (<>
         <Row>
             <Col md={3}>
-                <Meta title={userInfo.isAdmin ? "Admin DashBoard" : userInfo.name} />
-                <h2>User Profile</h2>
+                <Meta title={userInfo.isAdmin ? t("Admin DashBoard") : userInfo.name} />
+                <h2>{t('User Profile')}</h2>
                 <Form onSubmit={submitHandler}>
                     <Form.Group className='my-2' controlId='name'>
                         <Form.Label>Name</Form.Label>
                         <Form.Control
                             type='text'
                             name='name'
-                            placeholder='Enter a new name'
+                            placeholder={t('Enter a new name')}
                             value={info.name}
                             onChange={changeHandler}
                             required
                         />
                     </Form.Group>
                     <Form.Group className='my-2' controlId='email'>
-                        <Form.Label>Email</Form.Label>
+                        <Form.Label>{t('Email')}</Form.Label>
                         <Form.Control
                             type='email'
                             name="email"
-                            placeholder='Enter a new email'
+                            placeholder={t('Enter a new email')}
                             value={info.email}
                             onChange={changeHandler}
                             required
                         />
                     </Form.Group>
                     <Form.Group className='my-2' controlId='password'>
-                        <Form.Label>Password</Form.Label>
+                        <Form.Label>{t('Password')}</Form.Label>
                         <Form.Control
                             type='password'
                             name='password'
-                            placeholder='Enter a new password'
+                            placeholder={t('Enter a new password')}
                             value={info.password}
                             onChange={changeHandler}
                             required
                         />
                     </Form.Group>
                     <Form.Group className='my-2' controlId='confirmPassword'>
-                        <Form.Label>Confirm password</Form.Label>
+                        <Form.Label>{t('Confirm password')}</Form.Label>
                         <Form.Control
                             type='password'
                             name='confirmPassword'
-                            placeholder='Confirm your password'
+                            placeholder={t('Confirm your password')}
                             value={info.confirmPassword}
                             onChange={changeHandler}
                             required
                         />
                     </Form.Group>
                     <Button type='submit' variant='primary'>
-                        Update
+                        {t('Update')}
                     </Button>
                     {loadingUpdate && <Loader />}
                 </Form>
             </Col>
             <Col md={9} >
-                <h2 >My Orders</h2>
+                <h2 >{t('My Orders')}</h2>
                 {isLoading ? (<Loader />) :
                     error ? (<Message variant={"danger"}>{error?.data?.message || error?.error}</Message>) :
                         (
@@ -133,7 +138,7 @@ const ProfileScreen = () => {
                                                 <td>
                                                     <Link to={"/order/" + e._id}>
                                                         <Button className='btn-sm' variant='light' >
-                                                            Details
+                                                            {t('Details')}
                                                         </Button>
                                                     </Link>
 

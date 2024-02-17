@@ -13,7 +13,7 @@ import Catgories from './categories';
 const Header = () => {
     const { cartItems } = useSelector((state) => state.cart);
     const { userInfo } = useSelector((state) => state.auth);
-    const { t } = useTranslation()
+    const { t } = useTranslation();
 
     const dispatch = useDispatch();
     const navigate = useNavigate();
@@ -53,20 +53,20 @@ const Header = () => {
                             </Nav.Link>
                             {userInfo ? (
                                 <NavDropdown title={userInfo.name} id="username">
-                                    <NavDropdown.Item as={Link} to={"/profile"}>Profile</NavDropdown.Item>
-                                    <NavDropdown.Item onClick={logoutHandler}>Logout</NavDropdown.Item>
+                                    <NavDropdown.Item as={Link} to={"/profile"}>{t('Profile')}</NavDropdown.Item>
+                                    <NavDropdown.Item onClick={logoutHandler}>{t('Logout')}</NavDropdown.Item>
                                 </NavDropdown>
                             ) : (
                                 <Nav.Link as={Link} to={'/login'}>
-                                    <FaUser /> Sign In
+                                    <FaUser /> {t("Sign In")}
                                 </Nav.Link>
                             )
                             }
                             {userInfo && userInfo.isAdmin && (
                                 <NavDropdown title={userInfo.name + " menu"} id="admin">
-                                    <NavDropdown.Item as={Link} to={"/admin/orderlist"}>Orders</NavDropdown.Item>
-                                    <NavDropdown.Item as={Link} to={"/admin/userlist"}>Users</NavDropdown.Item>
-                                    <NavDropdown.Item as={Link} to={"/admin/productlist"}>Products</NavDropdown.Item>
+                                    <NavDropdown.Item as={Link} to={"/admin/orderlist"}>{t('Orders')}</NavDropdown.Item>
+                                    <NavDropdown.Item as={Link} to={"/admin/userlist"}>{t('Users')}</NavDropdown.Item>
+                                    <NavDropdown.Item as={Link} to={"/admin/productlist"}>{t('Products')}</NavDropdown.Item>
                                 </NavDropdown>
                             )}
                             <LanguageSwitcher />

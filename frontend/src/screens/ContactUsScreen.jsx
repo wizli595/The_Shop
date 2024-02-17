@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { Form, Button } from 'react-bootstrap';
 import { toast } from 'react-toastify';
 import { useSendConatctMutation } from '../features/slices/conatctApiSlice';
+import { useTranslation } from 'react-i18next';
 
 const ContactUsScreen = () => {
     const [formData, setFormData] = useState({
@@ -9,7 +10,11 @@ const ContactUsScreen = () => {
         email: '',
         message: '',
     });
-    const [sendContact, { isLoading }] = useSendConatctMutation()
+
+    const [sendContact, { isLoading }] = useSendConatctMutation();
+
+    const { t } = useTranslation();
+
     const handleChange = (e) => {
         const { name, value } = e.target;
         setFormData((prevData) => ({ ...prevData, [name]: value }));
@@ -20,7 +25,7 @@ const ContactUsScreen = () => {
 
         try {
             const res = await sendContact(formData).unwrap();
-            toast.success(res.message)
+            toast.success(res.message);
             setFormData({
                 name: '',
                 email: '',
@@ -28,7 +33,6 @@ const ContactUsScreen = () => {
             });
         } catch (err) {
             toast.error('Error submitting contact form:', err.message);
-            // Optionally, display an error message to the user
         }
     };
 
@@ -37,10 +41,10 @@ const ContactUsScreen = () => {
             <h1>Contact Us</h1>
             <Form onSubmit={handleSubmit}>
                 <Form.Group controlId="name" className="mb-3">
-                    <Form.Label>Your Name</Form.Label>
+                    <Form.Label>{t('Your Name')}</Form.Label>
                     <Form.Control
                         type="text"
-                        placeholder="Enter your name"
+                        placeholder={t("Enter your name")}
                         name="name"
                         value={formData.name}
                         onChange={handleChange}
@@ -48,10 +52,10 @@ const ContactUsScreen = () => {
                 </Form.Group>
 
                 <Form.Group controlId="email" className="mb-3">
-                    <Form.Label>Your Email</Form.Label>
+                    <Form.Label>{t('Your Email')}</Form.Label>
                     <Form.Control
                         type="email"
-                        placeholder="Enter your email"
+                        placeholder={t("Enter your email")}
                         name="email"
                         value={formData.email}
                         onChange={handleChange}
@@ -59,11 +63,11 @@ const ContactUsScreen = () => {
                 </Form.Group>
 
                 <Form.Group controlId="message" className="mb-3">
-                    <Form.Label>Your Message</Form.Label>
+                    <Form.Label>{t('Your Message')}</Form.Label>
                     <Form.Control
                         as="textarea"
                         rows={4}
-                        placeholder="Enter your message"
+                        placeholder={t("Enter your message")}
                         name="message"
                         value={formData.message}
                         onChange={handleChange}
@@ -71,7 +75,7 @@ const ContactUsScreen = () => {
                 </Form.Group>
 
                 <Button variant="primary" type="submit" disabled={isLoading}>
-                    Submit
+                    {t('Submit')}
                 </Button>
             </Form>
         </div>

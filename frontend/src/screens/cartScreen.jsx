@@ -6,26 +6,30 @@ import { addToCart, removeFromCart } from '../features/slices/cartSlice';
 import CartCard from '../components/cartCard';
 import CheckOutCard from '../components/checkOutCard';
 import Meta from '../components/meta';
+import { useTranslation } from 'react-i18next';
 const CartScreen = () => {
     const { cartItems } = useSelector((state) => state.cart);
-    const dispatch = useDispatch()
-    const navigate = useNavigate()
+
+    const { t } = useTranslation();
+
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
     const addToCartHandler = (product, qty) => {
-        dispatch(addToCart({ ...product, qty }))
-    }
+        dispatch(addToCart({ ...product, qty }));
+    };
     const removeFromCartHandler = (id) => {
-        dispatch(removeFromCart(id))
-    }
+        dispatch(removeFromCart(id));
+    };
     const checkOutHandler = () => {
-        navigate("/login?redirect=/shipping")
-    }
+        navigate("/login?redirect=/shipping");
+    };
     return (<>
         <Row>
-            <Meta title={"cart"} />
-            <h1 style={{ marginBottom: '20px' }}>Shopping Cart</h1>
+            <Meta title={t("cart")} />
+            <h1 style={{ marginBottom: '20px' }}>{t('Shopping Cart')}</h1>
             <Col md={8}>
                 {cartItems.length === 0 ? (<Message>
-                    Your cart is empty <Link to="/">Go Back</Link>
+                    {t('Your cart is empty')} <Link to="/">{t('Go Back')}</Link>
                 </Message>) :
                     (
                         <ListGroup variant='flush'>
@@ -47,6 +51,6 @@ const CartScreen = () => {
         </Row>
 
     </>);
-}
+};
 
 export default CartScreen;
