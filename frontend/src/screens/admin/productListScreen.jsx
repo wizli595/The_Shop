@@ -75,8 +75,8 @@ const ProductListScreen = () => {
                                     <tr key={e._id}>
                                         <td>{e._id}</td>
                                         <td>{e.name}</td>
-                                        <td>{e.category}</td>
                                         <td>{e.price}</td>
+                                        <td>{e.category}</td>
                                         <td>{e.brand}</td>
                                         <td>
                                             <Button className='btn-sm mx-2'
