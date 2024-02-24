@@ -85,7 +85,7 @@ const ProductScreen = () => {
                                     <ListGroup.Item>
                                         <Row>
                                             <Col>Price:</Col>
-                                            <Col>${SingleProd.price}</Col>
+                                            <Col>MAD{SingleProd.price}</Col>
                                         </Row>
                                     </ListGroup.Item>
                                     <ListGroup.Item>

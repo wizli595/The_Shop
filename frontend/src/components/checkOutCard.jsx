@@ -9,7 +9,7 @@ const CheckOutCard = ({ cartItems, check }) => {
                         SubTotal ({cartItems.reduce((acc, curr) => acc + curr.qty, 0)})
                         items
                     </h2>
-                    ${cartItems.reduce((acc, curr) => acc + curr.qty * curr.price, 0).toFixed(2)}
+                    MAD{cartItems.reduce((acc, curr) => acc + curr.qty * curr.price, 0).toFixed(2)}
                 </ListGroup.Item>
                 <ListGroup.Item>
                     <Button
