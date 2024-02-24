@@ -8,32 +8,35 @@ import { useLoginMutation, useLoginWithFacebookMutation } from '../features/slic
 import Loader from '../components/Loader';
 import { toast } from 'react-toastify';
 import FacebookLogin from 'react-facebook-login';
+import { useTranslation } from 'react-i18next';
+import Meta from '../components/meta';
 const LoginScreen = () => {
     const [loginInfo, setLoginInfo] = useState({
         email: "",
         password: ""
-    })
+    });
+    const { t } = useTranslation();
 
     const dispatch = useDispatch();
 
     const navigate = useNavigate();
 
-    const [login, { isLoading }] = useLoginMutation()
+    const [login, { isLoading }] = useLoginMutation();
 
     const [loginWithFacebook, { isLoading: facebookLoading }] = useLoginWithFacebookMutation();
 
-    const { userInfo } = useSelector((state) => state.auth)
+    const { userInfo } = useSelector((state) => state.auth);
 
-    const { search } = useLocation()
+    const { search } = useLocation();
 
-    const sp = new URLSearchParams(search)
+    const sp = new URLSearchParams(search);
 
-    const redirect = sp.get('redirect') || "/"
+    const redirect = sp.get('redirect') || "/";
     useEffect(() => {
         if (userInfo) {
-            navigate(redirect)
+            navigate(redirect);
         }
-    }, [navigate, redirect, userInfo])
+    }, [navigate, redirect, userInfo]);
 
     const submitHandler = async (e) => {
         e.preventDefault();
@@ -44,20 +47,20 @@ const LoginScreen = () => {
         } catch (err) {
             toast.error(err?.data?.message || err.error);
         }
-    }
+    };
 
     const changeHandler = (e) => {
-        const { name, value } = e.target
+        const { name, value } = e.target;
         setLoginInfo(prv => {
             return {
                 ...prv,
                 [name]: value
-            }
-        })
-    }
+            };
+        });
+    };
 
     const responseFacebook = async (response) => {
-        console.log(response)
+        console.log(response);
         // Handle the Facebook response here, e.g., send it to the server for authentication
         try {
             const res = await loginWithFacebook(response).unwrap();
@@ -70,36 +73,37 @@ const LoginScreen = () => {
 
     return (
         <FormContainer>
-            <h1>Sign In</h1>
+            <Meta title={t('Sign In')} />
+            <h1>{t('Sign In')}</h1>
             <Form onSubmit={submitHandler}>
                 <Form.Group controlId='email' className='my-3'>
-                    <Form.Label>Email Adress</Form.Label>
+                    <Form.Label>{t('Email Adress')}</Form.Label>
                     <Form.Control
                         type='email'
-                        placeholder='Enter Email...'
+                        placeholder={t('Enter Email...')}
                         name='email'
                         value={loginInfo.email}
                         onChange={changeHandler}
                     />
                 </Form.Group>
                 <Form.Group controlId='password' className='my-3'>
-                    <Form.Label>Password</Form.Label>
+                    <Form.Label>{t('Password')}</Form.Label>
                     <Form.Control
                         type='password'
-                        placeholder='Enter Password...'
+                        placeholder={t('Enter Password...')}
                         name='password'
                         value={loginInfo.password}
                         onChange={changeHandler}
                     />
                 </Form.Group>
                 <Button disabled={isLoading} type='submit' variant='primary' className='mt-2'>
-                    Sign In
+                    {t('Sign In')}
                 </Button>
 
                 {isLoading && <Loader />}
                 <div className='text-center my-4'>
                     <hr className='border-dark' />
-                    <span className=' text-muted'>Or</span>
+                    <span className=' text-muted'>{t('Or')}</span>
                     <hr className='border-dark' />
                 </div>
                 <div className='text-center'>
@@ -114,12 +118,12 @@ const LoginScreen = () => {
             </Form>
             <Row className='py-3'>
                 <Col>
-                    New Customer? <Link to={"/register"}>Register</Link>
+                    {t('New Customer?')} <Link to={"/register"}>{t('Register')}</Link>
                 </Col>
             </Row>
 
         </FormContainer>
     );
-}
+};
 
 export default LoginScreen;

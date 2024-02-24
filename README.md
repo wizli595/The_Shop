@@ -25,8 +25,8 @@ This comprehensive MERN (MongoDB, Express.js, React.js, Node.js) e-commerce appl
 - PayPal / credit card integration 
 - Whatsapp connect 
 - localization france/arabic
-- email contact (soon  🔥)
-- filter by category (soon  🔥)
+- email contact
+- filter by category 
 - Database seeder (products & users) 
 
 ## Usage

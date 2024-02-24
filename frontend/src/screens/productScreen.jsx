@@ -9,6 +9,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { addToCart } from '../features/slices/cartSlice';
 import { useState } from 'react';
 import Meta from '../components/meta';
+import { useTranslation } from 'react-i18next';
 
 const ProductScreen = () => {
 
@@ -20,6 +21,8 @@ const ProductScreen = () => {
         comment: "",
         rating: ""
     });
+
+    const { t } = useTranslation();
 
     const ratingList = ["poor", "fair", "good", "very good", "exellent"];
 
@@ -56,7 +59,7 @@ const ProductScreen = () => {
 
     return (<>
         <Link className='btn btn-light my-3' to='/'>
-            Go Back
+            {t('Go Back')}
         </Link>
         {isLoading ?
             (<Loader />) : err ?
@@ -75,7 +78,7 @@ const ProductScreen = () => {
                                     <Rating stars={SingleProd.rating} text={SingleProd.numReviews} />
                                 </ListGroup.Item>
                                 <ListGroup.Item>
-                                    Description: {SingleProd.description}
+                                    {t('Description')}: {SingleProd.description}
                                 </ListGroup.Item>
                             </ListGroup>
                         </Col>
@@ -85,28 +88,28 @@ const ProductScreen = () => {
                                     <ListGroup.Item>
                                         <Row>
                                             <Col>Price:</Col>
-                                            <Col>MAD{SingleProd.price}</Col>
+                                            <Col>${SingleProd.price}</Col>
                                         </Row>
                                     </ListGroup.Item>
                                     <ListGroup.Item>
                                         <Row>
-                                            <Col>Status:</Col>
+                                            <Col>{t('Status')}:</Col>
                                             {SingleProd.countInStock > 0 ? (
-                                                <Col className='text-success'>In Stock</Col>
+                                                <Col className='text-success'>{t('In Stock')}</Col>
                                             ) : SingleProd.onOrder ? (
                                                 <Col className='text-warning'>
-                                                    On Order -
-                                                    <Link to={"/onorder/" + productID}>View </Link>
+                                                    {t('On Order -')}
+                                                    <Link to={"/onorder/" + productID}>{t('View')} </Link>
                                                 </Col>
                                             ) : (
-                                                <Col className='text-danger'>Out Of Stock</Col>
+                                                <Col className='text-danger'>{t('Out Of Stock')}</Col>
                                             )}
                                         </Row>
                                     </ListGroup.Item>
                                     {SingleProd.countInStock > 0 &&
                                         <ListGroup.Item>
                                             <Row>
-                                                <Col>Qty</Col>
+                                                <Col>{t('Qty')}</Col>
                                                 <Col>
                                                     <Form.Control
                                                         as={"select"}
@@ -128,7 +131,7 @@ const ProductScreen = () => {
                                             onClick={addToCartHandler}
                                             disabled={SingleProd.countInStock === 0}
                                         >
-                                            Add To Cart
+                                            {t('Add To Cart')}
                                         </Button>
                                     </ListGroup.Item>
                                 </ListGroup>
@@ -137,9 +140,9 @@ const ProductScreen = () => {
                     </Row>
                     <Row className='review'>
                         <Col md={6}>
-                            {SingleProd.reviews.length === 0 && <Message>No Reviews yet</Message>}
+                            {SingleProd.reviews.length === 0 && <Message>{t('No Reviews yet')}</Message>}
                             <ListGroup variant='flush'>
-                                <h1>All Reviews</h1>
+                                <h1>{t('All Reviews')}</h1>
                                 {
                                     SingleProd.reviews.map((e) => (
                                         <ListGroup.Item key={e._id}>
@@ -151,7 +154,7 @@ const ProductScreen = () => {
                                     )
                                 }
                                 <ListGroup.Item>
-                                    <h2>Write a Customer Review</h2>
+                                    <h2>{t('Write a Customer Review')}</h2>
                                     {loadingReview && <Loader />}
                                     {
                                         userInfo ? (<>
@@ -163,8 +166,8 @@ const ProductScreen = () => {
                                                         name='rating'
                                                         onChange={changeHandler}
                                                     >
-                                                        <option value="">select your rating</option>
-                                                        {ratingList.map((e, i) => (<option key={i} value={i + 1}>{e}</option>))}
+                                                        <option value="">{t('select your rating')}</option>
+                                                        {ratingList.map((e, i) => (<option key={i} value={i + 1}>{t(e)}</option>))}
                                                     </Form.Control>
                                                 </FormGroup>
 
@@ -173,7 +176,7 @@ const ProductScreen = () => {
                                                     <Form.Control
                                                         type='text'
                                                         as={"textarea"}
-                                                        placeholder='Enter a Comment'
+                                                        placeholder={t('Enter a Comment')}
                                                         name='comment'
                                                         value={review.comment}
                                                         onChange={changeHandler}
@@ -182,11 +185,11 @@ const ProductScreen = () => {
                                                 <Button
                                                     type='submit'
                                                     disabled={loadingReview}
-                                                >comment</Button>
+                                                >{t('comment')}</Button>
                                             </Form>
                                         </>)
                                             :
-                                            (<Message>Login befor u can write</Message>)
+                                            (<Message>{t('Login befor u can write')}</Message>)
                                     }
                                 </ListGroup.Item>
 
